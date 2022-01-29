@@ -1,3 +1,4 @@
+import { SQL } from "../utils/syntax-highlighter";
 import type { SavedQuery } from "../types";
 
 export function ShowSavedQueries({
@@ -15,6 +16,7 @@ export function ShowSavedQueries({
       <table>
         <thead>
           <tr>
+            <th>&nbsp;</th>
             <th>Query</th>
             <th>Count</th>
             <th>Date</th>
@@ -25,13 +27,17 @@ export function ShowSavedQueries({
             return (
               <tr key={savedQuery.query + savedQuery.count + savedQuery.ts}>
                 <td>
-                  <pre
+                  <button
+                    type="button"
                     onClick={() => {
                       loadQuery(savedQuery.query);
                     }}
                   >
-                    {savedQuery.query}
-                  </pre>
+                    Load
+                  </button>
+                </td>
+                <td>
+                  <SQL code={savedQuery.query} />
                 </td>
                 <td>
                   <pre>{savedQuery.count}</pre>

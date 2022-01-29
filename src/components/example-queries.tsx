@@ -1,4 +1,4 @@
-import type { Page } from "../types";
+import { SQL } from "../utils/syntax-highlighter";
 
 const EXAMPLES = [
   { sql: "SELECT title FROM ?", description: "Select just 'title'" },
@@ -47,7 +47,9 @@ export function ExampleQueries({
         return (
           <div key={i}>
             <p>{description}</p>
-            <pre>{sql}</pre>
+            {/* <pre>{sql}</pre> */}
+            {/* <Refractor language="sql" value={sql} />{" "} */}
+            <SQL code={sql} />{" "}
             <button
               type="button"
               onClick={() => {
