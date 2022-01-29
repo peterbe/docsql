@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import alasql from "alasql";
 
@@ -112,11 +112,31 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
     }
   }, [query, foundRecords]);
 
+  const formSubmit = useCallback(() => {
+    setQuery(typedQuery.trim());
+  }, [typedQuery]);
+
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const textareaElement = textareaRef.current;
+  useEffect(() => {
+    const listener = (event: KeyboardEvent) => {
+      if (event.key == "Enter" && event.metaKey) {
+        formSubmit();
+      }
+    };
+    if (textareaElement) textareaElement.addEventListener("keydown", listener);
+
+    return () => {
+      if (textareaElement)
+        textareaElement.removeEventListener("keydown", listener);
+    };
+  }, [textareaElement, formSubmit]);
+
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        setQuery(typedQuery.trim());
+        formSubmit();
       }}
     >
       <p>
@@ -126,25 +146,9 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
           <code></code>
         )}
       </p>
-      {/* <MonacoEditor
-          language="sql"
-          value={typedQuery}
-          onChange={(value) => {
-            setTypedQuery(value);
-          }}
-        /> */}
-      {/* <CodeMirror
-          value={typedQuery}
-          minHeight="400px"
-          minWidth="1000px"
-          lang="sql"
-          // extensions={[javascript({ jsx: true })]}
-          onChange={(value, viewUpdate) => {
-            setTypedQuery(value);
-          }}
-        /> */}
       <textarea
         rows={Math.min(100, Math.max(6, typedQuery.split("\n").length))}
+        ref={textareaRef}
         cols={100}
         value={typedQuery}
         onChange={(event) => {
@@ -154,9 +158,13 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
         {query}
       </textarea>
       <br />
-      {/* <button type="submit">{query ? "Re-run" : "Run"}</button> */}
-      <button type="submit">Run</button>
-
+      <button type="submit" disabled={typedQuery.trim() === query}>
+        Run
+      </button>{" "}
+      <small>
+        <b>Tip!</b> Use <kbd>Cmd-Enter</kbd> to submit query when focus on
+        textarea
+      </small>
       <Toolbar
         pages={data.pages}
         savedQueries={savedQueries}
@@ -175,7 +183,6 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
         }}
       />
       {foundRecords !== null && <ShowFoundRecords records={foundRecords} />}
-
       <AboutMetadata meta={data.meta} />
     </form>
   );
