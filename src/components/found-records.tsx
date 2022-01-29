@@ -1,4 +1,5 @@
 import type { Records } from "../types";
+import styles from "../styles/found-records.module.css";
 
 export function ShowFoundRecords({ records }: { records: Records }) {
   if (records.length === 0) {
@@ -20,6 +21,7 @@ export function ShowFoundRecords({ records }: { records: Records }) {
       <table>
         <thead>
           <tr>
+            <th>&nbsp;</th>
             {keys.map((key) => {
               return <th key={key}>{key}</th>;
             })}
@@ -28,7 +30,14 @@ export function ShowFoundRecords({ records }: { records: Records }) {
         <tbody>
           {records.slice(0, MAX_ROWS).map((record, i) => {
             return (
-              <tr key={`${keyTemplate}${i}`}>
+              <tr
+                key={`${keyTemplate}${i}`}
+                id={`l${i + 1}`}
+                className={styles.row}
+              >
+                <td className={styles.row_number}>
+                  <a href={`#l${i + 1}`}>{i + 1}</a>
+                </td>
                 {keys.map((key) => {
                   const value = record[key];
                   return <td key={key}>{formatValue(value)}</td>;
