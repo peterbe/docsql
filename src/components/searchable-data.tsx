@@ -8,6 +8,7 @@ import { Toolbar } from "./toolbar";
 import { ShowFoundRecords } from "./found-records";
 import { AboutMetadata } from "./about-metadata";
 import useRouterReplace from "../hooks/use-router-replace";
+import { CodeInput } from "./code-input";
 
 function firstString(thing: string[] | string) {
   if (Array.isArray(thing)) return thing[0];
@@ -20,12 +21,13 @@ const DEFAULT_QUERY =
 export function SearchableData({ data }: { data: PagesAndMeta }) {
   const router = useRouter();
 
-  const defaultQuery = firstString(router.query.query || "");
+  const defaultQuery = firstString(router.query.query || DEFAULT_QUERY);
 
   const [foundRecords, setFoundRecords] = useState<Records | null>(null);
   const [queryError, setQueryError] = useState<Error | null>(null);
+
   const [query, setQuery] = useState(defaultQuery);
-  const [typedQuery, setTypedQuery] = useState(defaultQuery || DEFAULT_QUERY);
+  const [typedQuery, setTypedQuery] = useState(query);
 
   const { pages } = data;
 
@@ -112,33 +114,8 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
     }
   }, [query, foundRecords]);
 
-  const formSubmit = useCallback(() => {
-    setQuery(typedQuery.trim());
-  }, [typedQuery]);
-
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
-  const textareaElement = textareaRef.current;
-  useEffect(() => {
-    const listener = (event: KeyboardEvent) => {
-      if (event.key == "Enter" && event.metaKey) {
-        formSubmit();
-      }
-    };
-    if (textareaElement) textareaElement.addEventListener("keydown", listener);
-
-    return () => {
-      if (textareaElement)
-        textareaElement.removeEventListener("keydown", listener);
-    };
-  }, [textareaElement, formSubmit]);
-
   return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault();
-        formSubmit();
-      }}
-    >
+    <div>
       <p>
         {queryError ? (
           <code style={{ color: "red" }}>{queryError.toString()}</code>
@@ -146,25 +123,14 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
           <code></code>
         )}
       </p>
-      <textarea
-        rows={Math.min(100, Math.max(6, typedQuery.split("\n").length))}
-        ref={textareaRef}
-        cols={100}
-        value={typedQuery}
-        onChange={(event) => {
-          setTypedQuery(event.target.value);
+      <CodeInput
+        query={query}
+        typedQuery={typedQuery}
+        setTypedQuery={setTypedQuery}
+        onChange={(value: string) => {
+          setQuery(value.trim());
         }}
-      >
-        {query}
-      </textarea>
-      <br />
-      <button type="submit" disabled={typedQuery.trim() === query}>
-        Run
-      </button>{" "}
-      <small>
-        <b>Tip!</b> Use <kbd>Cmd-Enter</kbd> to submit query when focus on
-        textarea
-      </small>
+      />
       <Toolbar
         pages={data.pages}
         savedQueries={savedQueries}
@@ -176,7 +142,6 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
           setSavedQueries((prevState) => [
             ...prevState.filter((p) => p.query !== query),
           ]);
-
           if (typedQuery === query) {
             setTypedQuery("");
           }
@@ -184,6 +149,6 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
       />
       {foundRecords !== null && <ShowFoundRecords records={foundRecords} />}
       <AboutMetadata meta={data.meta} />
-    </form>
+    </div>
   );
 }

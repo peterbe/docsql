@@ -14,7 +14,7 @@ export function AboutMetadata({ meta }: { meta: Meta }) {
 
 function formatMilliSeconds(ms: number) {
   if (ms > 1000) {
-    return `${(ms / 1000).toFixed(2)}s`;
+    return `${(ms / 1000).toFixed(2)} s`;
   }
-  return `${(ms / 1000).toFixed(1)}ms`;
+  return `${(ms / 1000).toFixed(1)} ms`;
 }

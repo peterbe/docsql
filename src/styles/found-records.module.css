@@ -5,7 +5,8 @@
 .row_number {
   opacity: 0.5;
   font-size: 75%;
-
+  text-decoration: none;
+  color: #888;
 }
 
 .undefined_value {
