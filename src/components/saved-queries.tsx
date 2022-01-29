@@ -2,10 +2,12 @@ import type { SavedQuery } from "../types";
 
 export function ShowSavedQueries({
   savedQueries,
-  loadSavedQuery,
+  loadQuery,
+  deleteSavedQuery,
 }: {
   savedQueries: SavedQuery[];
-  loadSavedQuery: (s: string) => void;
+  loadQuery: (s: string) => void;
+  deleteSavedQuery: (s: string) => void;
 }) {
   return (
     <div>
@@ -25,7 +27,7 @@ export function ShowSavedQueries({
                 <td>
                   <pre
                     onClick={() => {
-                      loadSavedQuery(savedQuery.query);
+                      loadQuery(savedQuery.query);
                     }}
                   >
                     {savedQuery.query}
@@ -36,6 +38,17 @@ export function ShowSavedQueries({
                 </td>
                 <td>
                   <pre>{new Date(savedQuery.ts).toLocaleTimeString()}</pre>
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    title="Delete saved query"
+                    onClick={() => {
+                      deleteSavedQuery(savedQuery.query);
+                    }}
+                  >
+                    🗑
+                  </button>
                 </td>
               </tr>
             );

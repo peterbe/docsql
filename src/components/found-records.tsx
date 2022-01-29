@@ -74,7 +74,14 @@ function formatValue(input: any) {
     return "null";
   }
   if (Array.isArray(input)) {
-    return input.join(", ");
+    // return input.join(", ");
+    return JSON.stringify(input);
   }
-  return input;
+  if (typeof input === "object") {
+    return JSON.stringify(input);
+  }
+  if (input === undefined) {
+    return <span className={styles.undefined_value}>undefined</span>;
+  }
+  return input.toString();
 }

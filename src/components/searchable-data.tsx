@@ -42,10 +42,7 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
           throw err;
         }
       }
-      // router.replace(router.asPath);
-      // routerReplace(router.asPath);
     }
-    // }, [query, pages, router.asPath]);
   }, [query, pages]);
 
   useEffect(() => {
@@ -163,9 +160,18 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
       <Toolbar
         pages={data.pages}
         savedQueries={savedQueries}
-        loadSavedQuery={(query: string) => {
+        loadQuery={(query: string) => {
           setTypedQuery(query);
           setQuery(query.trim());
+        }}
+        deleteSavedQuery={(query: string) => {
+          setSavedQueries((prevState) => [
+            ...prevState.filter((p) => p.query !== query),
+          ]);
+
+          if (typedQuery === query) {
+            setTypedQuery("");
+          }
         }}
       />
       {foundRecords !== null && <ShowFoundRecords records={foundRecords} />}

@@ -7,3 +7,9 @@
   font-size: 75%;
 
 }
+
+.undefined_value {
+  font-style: italic;
+  font-size: 80%;
+  opacity: .9;
+}
