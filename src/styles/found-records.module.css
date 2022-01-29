@@ -1,0 +1,9 @@
+.row:hover {
+    background-color: #efefef;
+}
+
+.row_number {
+  opacity: 0.5;
+  font-size: 75%;
+
+}
