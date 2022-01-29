@@ -15,9 +15,12 @@ body {
   box-sizing: border-box;
 }
 
-code {
+textarea {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
+}
+/* code {
   background-color: #f5f2f0;
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   padding: 0.2em;
   border-radius: 3px;
-}
+} */

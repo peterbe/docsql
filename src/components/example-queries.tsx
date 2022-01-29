@@ -1,4 +1,7 @@
+import { Button } from "@nextui-org/react";
+
 import { SQL } from "../utils/syntax-highlighter";
+import styles from "../styles/example-queries.module.css";
 
 const EXAMPLES = [
   { sql: "SELECT title FROM ?", description: "Select just 'title'" },
@@ -45,19 +48,19 @@ export function ExampleQueries({
       </p>
       {EXAMPLES.map(({ sql, description }, i) => {
         return (
-          <div key={i}>
+          <div key={i} className={styles.example}>
             <p>{description}</p>
-            {/* <pre>{sql}</pre> */}
-            {/* <Refractor language="sql" value={sql} />{" "} */}
             <SQL code={sql} />{" "}
-            <button
+            <Button
+              size="xs"
+              color="success"
               type="button"
               onClick={() => {
                 loadQuery(sql);
               }}
             >
               Load SQL
-            </button>
+            </Button>
           </div>
         );
       })}

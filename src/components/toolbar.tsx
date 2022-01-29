@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Button } from "@nextui-org/react";
 
 import type { Page, SavedQuery } from "../types";
 import { ShowHelp } from "./help";
@@ -11,11 +12,13 @@ export function Toolbar({
   savedQueries,
   loadQuery,
   deleteSavedQuery,
+  starQuery,
 }: {
   pages: Page[];
   savedQueries: SavedQuery[];
   loadQuery: (query: string) => void;
   deleteSavedQuery: (query: string) => void;
+  starQuery: (query: string) => void;
 }) {
   const [open, setOpen] = useState<OpenOptions>("");
 
@@ -27,23 +30,38 @@ export function Toolbar({
 
   return (
     <div>
-      <p>
-        <button type="button" onClick={() => toggle("help")}>
+      <Button.Group>
+        <Button
+          type="button"
+          onClick={() => toggle("help")}
+          size="sm"
+          color="secondary"
+        >
           {open.includes("help") ? "Close help" : "Open help"}
-        </button>
+        </Button>
 
-        <button type="button" onClick={() => toggle("saved")}>
+        <Button
+          type="button"
+          onClick={() => toggle("saved")}
+          size="sm"
+          color="secondary"
+        >
           {open.includes("saved")
             ? "Close saved queries"
             : `Open saved queries (${savedQueries.length})`}
-        </button>
+        </Button>
 
-        <button type="button" onClick={() => toggle("example_queries")}>
+        <Button
+          type="button"
+          onClick={() => toggle("example_queries")}
+          size="sm"
+          color="secondary"
+        >
           {open.includes("example_queries")
             ? "Close example queries"
             : `Open example queries`}
-        </button>
-      </p>
+        </Button>
+      </Button.Group>
 
       {open === "help" && <ShowHelp pages={pages} />}
       {open === "saved" && (
@@ -56,6 +74,7 @@ export function Toolbar({
           deleteSavedQuery={(query: string) => {
             deleteSavedQuery(query);
           }}
+          starQuery={starQuery}
         />
       )}
       {open === "example_queries" && (

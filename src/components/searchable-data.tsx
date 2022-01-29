@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import alasql from "alasql";
 
@@ -52,7 +52,6 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
     const params = new URLSearchParams(asPathQuery);
     if (query) {
       params.set("query", query);
-      // saveQuery(query);
     } else {
       params.delete("query");
     }
@@ -60,7 +59,6 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
     if (params.toString()) {
       asPath += `?${params.toString()}`;
     }
-    // router.replace(asPath);
     routerReplace(asPath);
   }, [query, router.asPath, routerReplace]);
 
@@ -86,7 +84,14 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
 
   useEffect(() => {
     try {
-      sessionStorage.setItem("saved_queries", JSON.stringify(savedQueries));
+      sessionStorage.setItem(
+        "saved_queries",
+        JSON.stringify(
+          savedQueries.sort(
+            (a, b) => Number(Boolean(b.star)) - Number(Boolean(a.star))
+          )
+        )
+      );
     } catch (err) {
       if (process.env.NODE_ENV === "development") {
         throw err;
@@ -106,9 +111,20 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
         ) {
           return prevState;
         }
+
+        const keepQueries: SavedQuery[] = [];
+        // Can't just .slice() we because we want to make sure we don't delete
+        // those that are starred
+        const max = 50;
+        prevState.forEach((old, i) => {
+          if (old.query === query) return;
+          if (i > max && !old.star) return;
+          keepQueries.push(old);
+        });
+
         return [
           { query, count: foundRecords.length, ts: new Date().getTime() },
-          ...prevState.slice(0, 100).filter((p) => p.query !== query),
+          ...keepQueries,
         ];
       });
     }
@@ -119,9 +135,7 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
       <p>
         {queryError ? (
           <code style={{ color: "red" }}>{queryError.toString()}</code>
-        ) : (
-          <code></code>
-        )}
+        ) : null}
       </p>
       <CodeInput
         query={query}
@@ -130,6 +144,7 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
         onChange={(value: string) => {
           setQuery(value.trim());
         }}
+        hasError={Boolean(queryError)}
       />
       <Toolbar
         pages={data.pages}
@@ -145,6 +160,17 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
           if (typedQuery === query) {
             setTypedQuery("");
           }
+        }}
+        starQuery={(query: string) => {
+          setSavedQueries((prevState) => [
+            ...prevState.map((p) => {
+              if (p.query === query) {
+                return Object.assign({}, p, { star: !Boolean(p.star) });
+              } else {
+                return Object.assign({}, p);
+              }
+            }),
+          ]);
         }}
       />
       {foundRecords !== null && <ShowFoundRecords records={foundRecords} />}

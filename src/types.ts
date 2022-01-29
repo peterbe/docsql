@@ -18,6 +18,7 @@ export interface SavedQuery {
   query: string;
   count: number;
   ts: number;
+  star?: boolean;
 }
 
 export type Records = any[];

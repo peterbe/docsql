@@ -1,15 +1,18 @@
-import { useCallback, useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
+import { Button } from "@nextui-org/react";
 
 export function CodeInput({
   onChange,
   query,
   typedQuery,
   setTypedQuery,
+  hasError,
 }: {
   onChange: (query: string) => void;
   query: string;
   typedQuery: string;
   setTypedQuery: (query: string) => void;
+  hasError: boolean;
 }) {
   const formSubmit = useCallback(() => {
     onChange(typedQuery.trim());
@@ -50,9 +53,20 @@ export function CodeInput({
         {query}
       </textarea>
       <br />
-      <button type="submit" disabled={typedQuery.trim() === query}>
+      <Button
+        size="lg"
+        type="submit"
+        disabled={typedQuery.trim() === query}
+        color={
+          typedQuery.trim() !== query
+            ? "success"
+            : hasError
+            ? "error"
+            : undefined
+        }
+      >
         Run
-      </button>{" "}
+      </Button>{" "}
       <small>
         <b>Tip!</b> Use <kbd>Cmd-Enter</kbd> to submit query when focus on
         textarea

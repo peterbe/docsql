@@ -7,7 +7,7 @@ import matter from "gray-matter";
 
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import type { Page, Meta, PagesAndMeta } from "../types";
+import type { Page, Meta, PagesAndMeta } from "../../types";
 
 const _source = process.env.CONTENT_SOURCES || "";
 const CONTENT_SOURCES = _source

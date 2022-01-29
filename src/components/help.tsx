@@ -45,7 +45,7 @@ export function ShowHelp({ pages }: { pages: Page[] }) {
         <a
           href="https://github.com/agershun/alasql/wiki"
           target="_blank"
-          rel="noopener"
+          rel="noreferrer"
         >
           AlaSQL
         </a>{" "}
