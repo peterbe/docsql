@@ -37,7 +37,7 @@ export const Home: NextPage = () => {
               <b>Loading error:</b> <code>{error.toString()}</code>
             </p>
 
-            {data && <p>Showing "old" data.</p>}
+            {data && <p>Showing &quot;old&quot; data.</p>}
           </div>
         )}
         {!error && !data && <div>Loading</div>}

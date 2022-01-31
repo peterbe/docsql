@@ -9,17 +9,7 @@ import matter from "gray-matter";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { Page, Meta, PagesAndMeta } from "../../types";
 
-const _source = process.env.CONTENT_SOURCES || "";
-const CONTENT_SOURCES = _source
-  .split(",")
-  .map((x) => x.trim())
-  .filter(Boolean);
-
-if (CONTENT_SOURCES.length === 0) {
-  throw new Error(
-    "Configuration error. You have to specify a $CONTENT_SOURCES environment variable."
-  );
-}
+import { CONTENT_SOURCES } from "../../lib/sources";
 
 const root = "plugins";
 const staticRoot = path.resolve(root);

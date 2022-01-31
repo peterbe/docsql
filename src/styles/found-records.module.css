@@ -14,3 +14,8 @@
   font-size: 80%;
   opacity: .9;
 }
+
+.opening, .opened {
+  opacity: 0.8;
+  font-size: 80%;
+}

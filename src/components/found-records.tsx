@@ -1,7 +1,46 @@
+import { useEffect, useState } from "react";
 import type { Records } from "../types";
 import styles from "../styles/found-records.module.css";
+import useSWR from "swr";
+import type { OpenFile } from "../types";
 
 export function ShowFoundRecords({ records }: { records: Records }) {
+  const [opening, setOpening] = useState<null | string>(null);
+  useEffect(() => {
+    const timeout = opening
+      ? setTimeout(() => {
+          setOpening(null);
+        }, 3000)
+      : null;
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
+  }, [opening]);
+
+  const fetchURL = opening
+    ? "/api/open?" + new URLSearchParams({ filePath: opening })
+    : null;
+  const { data: openFileResult, error: openFileError } =
+    useSWR<OpenFile | null>(
+      fetchURL,
+      async (url) => {
+        const res = await fetch(url);
+        if (res.status === 404 || res.status === 400) {
+          const error = (await res.json()).error as string;
+          throw new Error(error);
+        } else if (res.status === 200) {
+          return (await res.json()) as OpenFile;
+        }
+        throw new Error(`${res.status} on ${url}`);
+      },
+      {
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+      }
+    );
+
+  // console.log({ openFileResult, openFileError });
+
   if (records.length === 0) {
     return <p>Absolutely diddly squat found. Sorry not sorry 🙃</p>;
   }
@@ -10,8 +49,40 @@ export function ShowFoundRecords({ records }: { records: Records }) {
 
   const MAX_ROWS = 1000;
 
+  // console.log("RENDER RECORDS", records.length);
+
   return (
     <div>
+      {opening && (
+        <p className={styles.opening}>
+          opening <code>{opening}</code>
+        </p>
+      )}
+      {openFileResult && (
+        <p className={styles.opened}>
+          tried to open <code>{openFileResult.filePath}</code>
+          using <code>{openFileResult.binary}</code>
+          {openFileResult.isTerminalEditor && `(is terminal editor)`}
+        </p>
+      )}
+
+      {/* {openFileResult ? (
+        <p>
+          tried to open <code>{openFileResult.filePath}</code>
+          using <code>{openFileResult.binary}</code>
+          {openFileResult.isTerminalEditor && `(is terminal editor)`}
+        </p>
+      ) : openFileError ? (
+        <p>
+          error opening <code>{opening}</code>:{" "}
+          <code>{openFileError.toString()}</code>
+        </p>
+      ) : opening ? (
+        <p>
+          opening <code>{opening}</code>
+        </p>
+      ) : null} */}
+
       <p>
         Found {records.length.toLocaleString()}{" "}
         {records.length > MAX_ROWS
@@ -40,7 +111,23 @@ export function ShowFoundRecords({ records }: { records: Records }) {
                 </td>
                 {keys.map((key) => {
                   const value = record[key];
-                  return <td key={key}>{formatValue(value)}</td>;
+                  return (
+                    <td key={key}>
+                      {key === "_id" ? (
+                        <a
+                          href={`#${value}`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setOpening(value);
+                          }}
+                        >
+                          <FilePath value={value} />
+                        </a>
+                      ) : (
+                        formatValue(value)
+                      )}
+                    </td>
+                  );
                 })}
               </tr>
             );
@@ -56,6 +143,34 @@ export function ShowFoundRecords({ records }: { records: Records }) {
       )}
     </div>
   );
+}
+
+function FilePath({
+  value,
+  maxLength = 100,
+}: {
+  value: string;
+  maxLength?: number;
+}) {
+  // Possibly truncate, nicely, because it can be really long
+  if (value.length > maxLength) {
+    const middle = Math.floor(value.length / 2);
+    let left = value.slice(0, middle);
+    let right = value.slice(middle);
+    let padding = 1;
+    while (left.length + right.length > maxLength) {
+      left = value.slice(0, middle - padding);
+      right = value.slice(middle + padding);
+      padding++;
+    }
+
+    return (
+      <abbr title={value}>
+        {left}[…]{right}
+      </abbr>
+    );
+  }
+  return <span>{value}</span>;
 }
 
 function formatValue(input: any) {

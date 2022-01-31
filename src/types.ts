@@ -22,3 +22,12 @@ export interface SavedQuery {
 }
 
 export type Records = any[];
+
+export interface OpenFile {
+  filePath: string;
+  editor?: string;
+  absolutePath?: string;
+  binary?: string;
+  isTerminalEditor?: boolean;
+  error?: string;
+}
