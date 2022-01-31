@@ -29,7 +29,7 @@ export function ShowSavedQueries({
             key={savedQuery.query + savedQuery.count + savedQuery.ts}
           >
             <p>
-              Found <b>{savedQuery.count} records</b>{" "}
+              Found <b>{savedQuery.count.toLocaleString()} records</b>{" "}
               {new Date(savedQuery.ts).toLocaleTimeString()}
             </p>
             <SQL code={savedQuery.query} />
@@ -47,7 +47,6 @@ export function ShowSavedQueries({
               </Grid>
 
               <Grid>
-                {/* <Star /> */}
                 <Button
                   title="Don't let it drop off"
                   icon={
@@ -60,17 +59,6 @@ export function ShowSavedQueries({
                     starQuery(savedQuery.query);
                   }}
                 />
-                {/* <Button
-                  type="button"
-                  color="error"
-                  size="xs"
-                  title="Delete saved query"
-                  onClick={() => {
-                    deleteSavedQuery(savedQuery.query);
-                  }}
-                >
-                  Delete
-                </Button> */}
               </Grid>
 
               <Grid>

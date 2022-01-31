@@ -1,4 +1,5 @@
-import { Button } from "@nextui-org/react";
+import { useState } from "react";
+import { Button, Grid, Input } from "@nextui-org/react";
 
 import { SQL } from "../utils/syntax-highlighter";
 import styles from "../styles/example-queries.module.css";
@@ -31,6 +32,23 @@ const EXAMPLES = [
     description:
       "Select from JSON object and filter by those that have a truthy value on that key",
   },
+  {
+    sql: "SELECT topics, topics->length FROM ? WHERE topics->label",
+    description: "Select arrays and filter out those that are null",
+  },
+  {
+    sql: "SELECT children->(0) FROM ? WHERE children->length",
+    description: "Select first element in array where the array is something",
+  },
+  {
+    sql: "SELECT changelog FROM ? WHERE NOT changelog->label",
+    description:
+      "Select from JSON objects those that do not have a certain key",
+  },
+  {
+    sql: "SELECT title FROM ? ORDER BY RANDOM() LIMIT 10",
+    description: "10 random titles",
+  },
 ];
 
 export function ExampleQueries({
@@ -38,15 +56,42 @@ export function ExampleQueries({
 }: {
   loadQuery: (s: string) => void;
 }) {
+  const [search, setSearch] = useState("");
+
+  const examples = EXAMPLES.filter(({ sql, description }) => {
+    if (search.trim()) {
+      return (
+        sql.toLowerCase().includes(search.toLowerCase()) ||
+        description.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+    return true;
+  });
   return (
     <div>
-      <p>Example queries</p>
-      <p>
-        <small>
-          These are static examples they might not work with <i>your</i> data.
-        </small>
-      </p>
-      {EXAMPLES.map(({ sql, description }, i) => {
+      <Grid.Container gap={2}>
+        <Grid>
+          <p>
+            <small>
+              These are static examples they might not work with <i>your</i>{" "}
+              data.
+            </small>
+          </p>
+        </Grid>
+        <Grid>
+          <form>
+            <Input
+              type="search"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              clearable
+              // labelPlaceholder="Search"
+              placeholder="Search..."
+            />
+          </form>
+        </Grid>
+      </Grid.Container>
+      {examples.map(({ sql, description }, i) => {
         return (
           <div key={i} className={styles.example}>
             <p>{description}</p>
@@ -64,6 +109,11 @@ export function ExampleQueries({
           </div>
         );
       })}
+      {examples.length === 0 && (
+        <p>
+          <i>No examples found</i>
+        </p>
+      )}
     </div>
   );
 }

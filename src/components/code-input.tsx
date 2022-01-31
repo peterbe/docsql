@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from "react";
-import { Button } from "@nextui-org/react";
+import { Grid, Button } from "@nextui-org/react";
 
 export function CodeInput({
   onChange,
@@ -52,25 +52,31 @@ export function CodeInput({
       >
         {query}
       </textarea>
-      <br />
-      <Button
-        size="lg"
-        type="submit"
-        disabled={typedQuery.trim() === query}
-        color={
-          typedQuery.trim() !== query
-            ? "success"
-            : hasError
-            ? "error"
-            : undefined
-        }
-      >
-        Run
-      </Button>{" "}
-      <small>
-        <b>Tip!</b> Use <kbd>Cmd-Enter</kbd> to submit query when focus on
-        textarea
-      </small>
+
+      <Grid.Container gap={2}>
+        <Grid>
+          <Button
+            size="lg"
+            type="submit"
+            disabled={typedQuery.trim() === query}
+            color={
+              typedQuery.trim() !== query
+                ? "success"
+                : hasError
+                ? "error"
+                : undefined
+            }
+          >
+            Run
+          </Button>
+        </Grid>
+        <Grid>
+          <small>
+            <b>Tip!</b> Use <kbd>Cmd-Enter</kbd> to submit query when focus is
+            inside textarea
+          </small>
+        </Grid>
+      </Grid.Container>
     </form>
   );
 }

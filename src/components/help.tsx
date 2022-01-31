@@ -10,13 +10,15 @@ export function ShowHelp({ pages }: { pages: Page[] }) {
   Object.entries(pages[0])
     .filter(([key]) => !key.startsWith("_"))
     .forEach(([name, value]) => {
-      let type: "number" | "string" | "array" | "unknown" = "unknown";
+      let type: "number" | "string" | "array" | "json" | "unknown" = "unknown";
       if (typeof value === "number") {
         type = "number";
       } else if (typeof value === "string") {
         type = "string";
       } else if (Array.isArray(value)) {
         type = "array";
+      } else if (typeof value === "object") {
+        type = "json";
       } else {
         console.log(name, value);
       }
@@ -54,7 +56,7 @@ export function ShowHelp({ pages }: { pages: Page[] }) {
       <p>
         <b>Tip!</b> Since AlaSQL is based on JavaScript you can substitute the{" "}
         <code>.</code>
-        for <code>&gt;-</code>. For example, in JavaScript you would do:{" "}
+        for <code>-&gt;</code>. For example, in JavaScript you would do:{" "}
         <code>myString.length.toLocaleString()</code>, and in AlaSQL that
         becomes <code>SELECT mystring-&gt;length-&gt;toLocaleString()</code>.
       </p>

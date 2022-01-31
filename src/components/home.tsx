@@ -4,6 +4,7 @@ import useSWR from "swr";
 
 import type { PagesAndMeta } from "../types";
 import { SearchableData } from "./searchable-data";
+import { Footer } from "./footer";
 import styles from "../styles/Home.module.css";
 
 export const Home: NextPage = () => {
@@ -24,7 +25,7 @@ export const Home: NextPage = () => {
         <title>Docs Traits</title>
         <meta
           name="description"
-          content="Getting an overview of your Jamstack content"
+          content="Getting an overview of your Markdown content"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -40,6 +41,10 @@ export const Home: NextPage = () => {
           <SearchableData data={data} />
         )}
       </main>
+
+      <footer className={styles.footer}>
+        <Footer />
+      </footer>
     </div>
   );
 };
