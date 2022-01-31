@@ -31,15 +31,17 @@ export const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        {error ? (
-          <div>
-            Loading error: <code>{error.toString()}</code>
+        {error && (
+          <div className={styles.loading_error}>
+            <p>
+              <b>Loading error:</b> <code>{error.toString()}</code>
+            </p>
+
+            {data && <p>Showing "old" data.</p>}
           </div>
-        ) : !data ? (
-          <div>Loading</div>
-        ) : (
-          <SearchableData data={data} />
         )}
+        {!error && !data && <div>Loading</div>}
+        {data && <SearchableData data={data} />}
       </main>
 
       <footer className={styles.footer}>
