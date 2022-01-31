@@ -66,9 +66,11 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
   const [savedQueries, setSavedQueries] = useState<SavedQuery[]>([]);
 
   useEffect(() => {
+    const storage =
+      process.env.NODE_ENV === "development" ? sessionStorage : localStorage;
     try {
       let previous = JSON.parse(
-        sessionStorage.getItem("saved_queries") || "[]"
+        storage.getItem("saved_queries") || "[]"
       ) as SavedQuery[];
       if (!Array.isArray(previous)) {
         previous = [];
@@ -84,8 +86,10 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
   }, []);
 
   useEffect(() => {
+    const storage =
+      process.env.NODE_ENV === "development" ? sessionStorage : localStorage;
     try {
-      sessionStorage.setItem(
+      storage.setItem(
         "saved_queries",
         JSON.stringify(
           savedQueries.sort(

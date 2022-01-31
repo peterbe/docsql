@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef } from "react";
 import { Grid, Button } from "@nextui-org/react";
 
+import styles from "../styles/code-input.module.css";
+
 export function CodeInput({
   onChange,
   query,
@@ -42,9 +44,10 @@ export function CodeInput({
       }}
     >
       <textarea
-        rows={Math.min(100, Math.max(6, typedQuery.split("\n").length))}
+        className={styles.textarea}
+        rows={Math.min(100, Math.max(4, typedQuery.split("\n").length))}
         ref={textareaRef}
-        cols={100}
+        // cols={100}
         value={typedQuery}
         onChange={(event) => {
           setTypedQuery(event.target.value);

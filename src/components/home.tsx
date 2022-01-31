@@ -5,7 +5,7 @@ import useSWR from "swr";
 import type { PagesAndMeta } from "../types";
 import { SearchableData } from "./searchable-data";
 import { Footer } from "./footer";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/home.module.css";
 
 export const Home: NextPage = () => {
   const { data, error } = useSWR<PagesAndMeta, Error>(

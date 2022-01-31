@@ -24,3 +24,11 @@ textarea {
   padding: 0.2em;
   border-radius: 3px;
 } */
+
+th {
+  background-color: #efefef;
+}
+td, th {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: .9em;
+}
