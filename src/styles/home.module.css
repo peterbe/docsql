@@ -32,3 +32,6 @@
 .loading_error {
   padding: 6rem;
 }
+.reloading_error {
+  padding: 1rem;
+}

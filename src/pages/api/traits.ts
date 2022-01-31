@@ -52,7 +52,6 @@ export default async function handler(
 ) {
   const t0 = new Date();
   for (const source of CONTENT_SOURCES) {
-    // const files = new fdir().withFullPaths().withErrors().crawl(source).sync();
     const files = new fdir()
       .crawlWithOptions(source, {
         includeBasePath: true,
@@ -64,7 +63,6 @@ export default async function handler(
       if (!sourceFilePath.endsWith(".md")) continue;
       if (path.basename(sourceFilePath.toLowerCase()) === "readme.md") continue;
 
-      // console.log(sourceFilePath);
       const raw = fs.readFileSync(sourceFilePath, "utf-8");
       const _hash = `${pluginsHash}.${getHash(raw, sourceFilePath)}`;
       const _id = path.relative(source, sourceFilePath);

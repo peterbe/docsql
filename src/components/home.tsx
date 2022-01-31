@@ -32,7 +32,7 @@ export const Home: NextPage = () => {
 
       <main className={styles.main}>
         {error && (
-          <div className={styles.loading_error}>
+          <div className={data ? styles.reloading_error : styles.loading_error}>
             <p>
               <b>Loading error:</b> <code>{error.toString()}</code>
             </p>
