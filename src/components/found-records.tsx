@@ -49,8 +49,6 @@ export function ShowFoundRecords({ records }: { records: Records }) {
 
   const MAX_ROWS = 1000;
 
-  // console.log("RENDER RECORDS", records.length);
-
   return (
     <div>
       {opening && (

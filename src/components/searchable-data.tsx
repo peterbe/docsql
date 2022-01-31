@@ -135,6 +135,9 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
     }
   }, [query, foundRecords]);
 
+  // THIS IS BAD because for every keystroke of `typedQuery` all of the
+  // below components re-renders
+
   return (
     <div>
       {queryError && (
