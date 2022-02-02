@@ -20,24 +20,23 @@ export function ShowFoundRecords({ records }: { records: Records }) {
   const fetchURL = opening
     ? "/api/open?" + new URLSearchParams({ filePath: opening })
     : null;
-  const { data: openFileResult, error: openFileError } =
-    useSWR<OpenFile | null>(
-      fetchURL,
-      async (url) => {
-        const res = await fetch(url);
-        if (res.status === 404 || res.status === 400) {
-          const error = (await res.json()).error as string;
-          throw new Error(error);
-        } else if (res.status === 200) {
-          return (await res.json()) as OpenFile;
-        }
-        throw new Error(`${res.status} on ${url}`);
-      },
-      {
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false,
+  const { data: openFileResult, error: openFileError } = useSWR<OpenFile>(
+    fetchURL,
+    async (url) => {
+      const res = await fetch(url);
+      if (res.status === 404 || res.status === 400) {
+        const error = (await res.json()).error as string;
+        throw new Error(error);
+      } else if (res.status === 200) {
+        return (await res.json()) as OpenFile;
       }
-    );
+      throw new Error(`${res.status} on ${url}`);
+    },
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
+  );
 
   // console.log({ openFileResult, openFileError });
 
@@ -63,23 +62,12 @@ export function ShowFoundRecords({ records }: { records: Records }) {
           {openFileResult.isTerminalEditor && `(is terminal editor)`}
         </p>
       )}
-
-      {/* {openFileResult ? (
-        <p>
-          tried to open <code>{openFileResult.filePath}</code>
-          using <code>{openFileResult.binary}</code>
-          {openFileResult.isTerminalEditor && `(is terminal editor)`}
-        </p>
-      ) : openFileError ? (
-        <p>
-          error opening <code>{opening}</code>:{" "}
+      {openFileError && (
+        <p className={styles.opened}>
+          an error occurred trying to open the file:{" "}
           <code>{openFileError.toString()}</code>
         </p>
-      ) : opening ? (
-        <p>
-          opening <code>{opening}</code>
-        </p>
-      ) : null} */}
+      )}
 
       <p>
         Found {records.length.toLocaleString()}{" "}

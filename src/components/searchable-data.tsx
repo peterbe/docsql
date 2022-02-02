@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import alasql from "alasql";
 import { Card, Text } from "@nextui-org/react";
 
-import type { PagesAndMeta, SavedQuery, Records } from "../types";
+import type { PagesAndMeta, SavedQuery, Records, Page } from "../types";
 
 import { Toolbar } from "./toolbar";
 import { ShowFoundRecords } from "./found-records";
@@ -28,7 +28,7 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
   const [queryError, setQueryError] = useState<Error | null>(null);
 
   const [query, setQuery] = useState(defaultQuery);
-  const [typedQuery, setTypedQuery] = useState(query);
+  // const [typedQuery, setTypedQuery] = useState(query);
 
   const { pages } = data;
 
@@ -107,7 +107,7 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
   }, [savedQueries]);
 
   useEffect(() => {
-    if (foundRecords) {
+    if (foundRecords && !queryError) {
       setSavedQueries((prevState) => {
         if (
           prevState.length > 0 &&
@@ -133,10 +133,7 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
         ];
       });
     }
-  }, [query, foundRecords]);
-
-  // THIS IS BAD because for every keystroke of `typedQuery` all of the
-  // below components re-renders
+  }, [query, foundRecords, queryError]);
 
   return (
     <div>
@@ -151,29 +148,16 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
           <code style={{ color: "red" }}>{queryError.toString()}</code>
         </Card>
       )}
-      <CodeInput
+      <CodeInputAndToolbar
         query={query}
-        typedQuery={typedQuery}
-        setTypedQuery={setTypedQuery}
-        onChange={(value: string) => {
-          setQuery(value.trim());
-        }}
-        hasError={Boolean(queryError)}
-      />
-      <Toolbar
+        setQuery={setQuery}
+        queryError={queryError}
         pages={data.pages}
         savedQueries={savedQueries}
-        loadQuery={(query: string) => {
-          setTypedQuery(query);
-          setQuery(query.trim());
-        }}
         deleteSavedQuery={(query: string) => {
           setSavedQueries((prevState) => [
             ...prevState.filter((p) => p.query !== query),
           ]);
-          if (typedQuery === query) {
-            setTypedQuery("");
-          }
         }}
         starQuery={(query: string) => {
           setSavedQueries((prevState) => [
@@ -189,6 +173,55 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
       />
       {foundRecords !== null && <ShowFoundRecords records={foundRecords} />}
       <AboutMetadata meta={data.meta} />
+    </div>
+  );
+}
+
+function CodeInputAndToolbar({
+  query,
+  setQuery,
+  queryError,
+  pages,
+  savedQueries,
+  deleteSavedQuery,
+  starQuery,
+}: {
+  query: string;
+  setQuery: (x: string) => void;
+  queryError: Error | null;
+  pages: Page[];
+  savedQueries: SavedQuery[];
+  deleteSavedQuery: (query: string) => void;
+  starQuery: (query: string) => void;
+}) {
+  const [typedQuery, setTypedQuery] = useState(query);
+  return (
+    <div>
+      <CodeInput
+        query={query}
+        typedQuery={typedQuery}
+        setTypedQuery={setTypedQuery}
+        onChange={(value: string) => {
+          setQuery(value.trim());
+        }}
+        hasError={Boolean(queryError)}
+      />
+      <Toolbar
+        pages={pages}
+        savedQueries={savedQueries}
+        loadQuery={(query: string) => {
+          setTypedQuery(query);
+          setQuery(query.trim());
+        }}
+        deleteSavedQuery={(query: string) => {
+          deleteSavedQuery(query);
+
+          if (typedQuery === query) {
+            setTypedQuery("");
+          }
+        }}
+        starQuery={starQuery}
+      />
     </div>
   );
 }
