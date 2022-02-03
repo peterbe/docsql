@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import useSWR from "swr";
+import { Alert, LoadingOverlay } from "@mantine/core";
 
 import type { PagesAndMeta } from "../types";
 import { SearchableData } from "./searchable-data";
@@ -22,15 +23,21 @@ export const Home: NextPage = () => {
     <div className={styles.container}>
       <main className={styles.main}>
         {error && (
-          <div className={data ? styles.reloading_error : styles.loading_error}>
-            <p>
-              <b>Loading error:</b> <code>{error.toString()}</code>
-            </p>
+          <Alert color="red">
+            <div
+              className={data ? styles.reloading_error : styles.loading_error}
+            >
+              <p>
+                <b>Loading error:</b> <code>{error.toString()}</code>
+              </p>
 
-            {data && <p>Showing &quot;old&quot; data.</p>}
-          </div>
+              {data && <p>Showing &quot;old&quot; data.</p>}
+            </div>
+          </Alert>
         )}
-        {!error && !data && <div>Loading</div>}
+        {/* {!error && !data && <div>Loading</div>} */}
+        {/* {!error && !data && <LoadingOverlay visible={true} />} */}
+        <LoadingOverlay visible={!error && !data} transitionDuration={500} />
         {data && <SearchableData data={data} />}
       </main>
 

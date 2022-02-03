@@ -1,4 +1,4 @@
-import { Title } from "@mantine/core";
+import { Paper, Title } from "@mantine/core";
 import { Container } from "@mantine/core";
 
 import type { Page } from "../types";
@@ -30,35 +30,44 @@ export function ShowHelp({ pages }: { pages: Page[] }) {
     });
 
   return (
-    <Container fluid padding="lg">
-      <Title order={4}>Possible keys</Title>
-      <ul>
-        {allKeys.map(({ name, type }) => (
-          <li key={name}>
-            <code>{name}</code> <small>({type})</small>
-          </li>
-        ))}
-      </ul>
+    <div>
+      <Container style={{ margin: 40 }}>
+        <Paper padding="md" shadow="sm" withBorder>
+          <Title order={4}>Possible keys</Title>
+          <ul>
+            {allKeys.map(({ name, type }) => (
+              <li key={name}>
+                <code>{name}</code> <small>({type})</small>
+              </li>
+            ))}
+          </ul>
+        </Paper>
+      </Container>
 
-      <Title order={4}>Read the docs</Title>
-      <p>
-        The most important documentation is{" "}
-        <a
-          href="https://github.com/agershun/alasql/wiki"
-          target="_blank"
-          rel="noreferrer"
-        >
-          AlaSQL
-        </a>{" "}
-        which is what the SQL engine is based on.
-      </p>
-      <p>
-        <b>Tip!</b> Since AlaSQL is based on JavaScript you can substitute the{" "}
-        <code>.</code>
-        for <code>-&gt;</code>. For example, in JavaScript you would do:{" "}
-        <code>myString.length.toLocaleString()</code>, and in AlaSQL that
-        becomes <code>SELECT mystring-&gt;length-&gt;toLocaleString()</code>.
-      </p>
-    </Container>
+      <Container style={{ margin: 40 }}>
+        <Paper padding="md" shadow="sm" withBorder>
+          <Title order={4}>Read the docs</Title>
+          <p>
+            The most important documentation is{" "}
+            <a
+              href="https://github.com/agershun/alasql/wiki"
+              target="_blank"
+              rel="noreferrer"
+            >
+              AlaSQL
+            </a>{" "}
+            which is what the SQL engine is based on.
+          </p>
+          <p>
+            <b>Tip!</b> Since AlaSQL is based on JavaScript you can substitute
+            the <code>.</code>
+            for <code>-&gt;</code>. For example, in JavaScript you would do:{" "}
+            <code>myString.length.toLocaleString()</code>, and in AlaSQL that
+            becomes <code>SELECT mystring-&gt;length-&gt;toLocaleString()</code>
+            .
+          </p>
+        </Paper>
+      </Container>
+    </div>
   );
 }
