@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "@nextui-org/react";
+import { Group, Button } from "@mantine/core";
 
 import type { Page, SavedQuery } from "../types";
 import { ShowHelp } from "./help";
@@ -30,7 +30,7 @@ export function Toolbar({
 
   return (
     <div>
-      <Button.Group>
+      <Group>
         <Button
           type="button"
           onClick={() => toggle("help")}
@@ -61,7 +61,7 @@ export function Toolbar({
             ? "Close example queries"
             : `Open example queries`}
         </Button>
-      </Button.Group>
+      </Group>
 
       {open === "help" && <ShowHelp pages={pages} />}
       {open === "saved" && (

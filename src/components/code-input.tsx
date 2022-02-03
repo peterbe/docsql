@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from "react";
-import { Grid, Button } from "@nextui-org/react";
-
+import { Button, Grid } from "@mantine/core";
+import { Kbd } from "@mantine/core";
 import styles from "../styles/code-input.module.css";
 
 export function CodeInput({
@@ -56,8 +56,8 @@ export function CodeInput({
         {query}
       </textarea>
 
-      <Grid.Container gap={2}>
-        <Grid>
+      <Grid>
+        <Grid.Col span={6}>
           <Button
             size="lg"
             type="submit"
@@ -72,14 +72,14 @@ export function CodeInput({
           >
             Run
           </Button>
-        </Grid>
-        <Grid>
+        </Grid.Col>
+        <Grid.Col span={6}>
           <small>
-            <b>Tip!</b> Use <kbd>Cmd-Enter</kbd> to submit query when focus is
-            inside textarea
+            <b>Tip!</b> Use <Kbd>⌘</Kbd>
+            <Kbd>Enter</Kbd> to submit query when focus is inside textarea
           </small>
-        </Grid>
-      </Grid.Container>
+        </Grid.Col>
+      </Grid>
     </form>
   );
 }

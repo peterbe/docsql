@@ -1,4 +1,4 @@
-import { Button, Grid } from "@nextui-org/react";
+import { Button, Group } from "@mantine/core";
 import { Star } from "react-iconly";
 
 import { SQL } from "../utils/syntax-highlighter";
@@ -33,47 +33,41 @@ export function ShowSavedQueries({
               {new Date(savedQuery.ts).toLocaleTimeString()}
             </p>
             <SQL code={savedQuery.query} />
-            <Grid.Container gap={2}>
-              <Grid>
-                <Button
-                  type="button"
-                  color="success"
-                  onClick={() => {
-                    loadQuery(savedQuery.query);
-                  }}
-                >
-                  Load
-                </Button>
-              </Grid>
-
-              <Grid>
-                <Button
-                  title="Don't let it drop off"
-                  icon={
-                    <Star
-                      filled={star}
-                      primaryColor={star ? "yellow" : "white"}
-                    />
-                  }
-                  onClick={() => {
-                    starQuery(savedQuery.query);
-                  }}
-                />
-              </Grid>
-
-              <Grid>
-                <Button
-                  type="button"
-                  color="error"
-                  title="Delete saved query"
-                  onClick={() => {
-                    deleteSavedQuery(savedQuery.query);
-                  }}
-                >
-                  Delete
-                </Button>
-              </Grid>
-            </Grid.Container>
+            <Group>
+              <Button
+                type="button"
+                color="green"
+                onClick={() => {
+                  loadQuery(savedQuery.query);
+                }}
+              >
+                Load
+              </Button>
+              <Button
+                title="Don't let it drop off"
+                // icon={
+                //   <Star
+                //     filled={star}
+                //     primaryColor={star ? "yellow" : "white"}
+                //   />
+                // }
+                onClick={() => {
+                  starQuery(savedQuery.query);
+                }}
+              >
+                <Star filled={star} primaryColor={star ? "yellow" : "white"} />
+              </Button>
+              <Button
+                type="button"
+                color="red"
+                title="Delete saved query"
+                onClick={() => {
+                  deleteSavedQuery(savedQuery.query);
+                }}
+              >
+                Delete
+              </Button>
+            </Group>
           </div>
         );
       })}

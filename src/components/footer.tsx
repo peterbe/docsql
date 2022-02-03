@@ -1,27 +1,22 @@
-// import { useTheme as useNextTheme } from "next-themes";
-import { Switch, useTheme } from "@nextui-org/react";
-import useDarkMode from "use-dark-mode";
+import { Switch, useMantineColorScheme } from "@mantine/core";
+// import { SunIcon, MoonIcon } from "@modulz/radix-icons";
 
 export function Footer() {
-  //   const { setTheme } = useNextTheme();
-  //   const { isDark, type } = useTheme();
-  //   const { type } = useTheme();
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const dark = colorScheme === "dark";
 
-  const darkMode = useDarkMode(false);
-
+  return null;
   return (
-    <div>
-      {/* The current theme is: {type} */}
-      <Switch
-        initialChecked={Boolean(darkMode.value)}
-        onChange={() => {
-          // setTheme(e.target.checked ? "dark" : "light")
-          darkMode.toggle();
-        }}
-        // size="xl"
-        // iconOn={<Sun filled />}
-        // iconOff={<Moon filled />}
-      />
-    </div>
+    <Switch
+      // color={dark ? "yellow" : "blue"}
+      onClick={() => toggleColorScheme()}
+      title="Toggle color scheme"
+    >
+      {dark
+        ? "Light"
+        : // <SunIcon style={{ width: 18, height: 18 }} />
+          // <MoonIcon style={{ width: 18, height: 18 }} />
+          "Dark"}
+    </Switch>
   );
 }

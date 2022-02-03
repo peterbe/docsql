@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import alasql from "alasql";
-import { Card, Text } from "@nextui-org/react";
+import { Alert } from "@mantine/core";
 
 import type { PagesAndMeta, SavedQuery, Records, Page } from "../types";
 
@@ -138,15 +138,9 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
   return (
     <div>
       {queryError && (
-        <Card color="error">
-          <Text
-            css={{ fontWeight: "$bold", color: "$white" }}
-            transform="capitalize"
-          >
-            Query error
-          </Text>
-          <code style={{ color: "red" }}>{queryError.toString()}</code>
-        </Card>
+        <Alert title="Query error" color="red" radius="md">
+          <code>{queryError.toString()}</code>
+        </Alert>
       )}
       <CodeInputAndToolbar
         query={query}

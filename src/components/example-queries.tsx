@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Button, Grid, Input } from "@nextui-org/react";
-
+import { Button, Highlight, TextInput, Grid } from "@mantine/core";
 import { SQL } from "../utils/syntax-highlighter";
 import styles from "../styles/example-queries.module.css";
 
@@ -69,32 +68,32 @@ export function ExampleQueries({
   });
   return (
     <div>
-      <Grid.Container gap={2}>
-        <Grid>
+      <Grid>
+        <Grid.Col span={6}>
           <p>
             <small>
               These are static examples they might not work with <i>your</i>{" "}
               data.
             </small>
           </p>
-        </Grid>
-        <Grid>
+        </Grid.Col>
+        <Grid.Col span={6}>
           <form>
-            <Input
+            <TextInput
               type="search"
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              clearable
-              // labelPlaceholder="Search"
+              // label="Search"
               placeholder="Search..."
             />
           </form>
-        </Grid>
-      </Grid.Container>
+        </Grid.Col>
+      </Grid>
+
       {examples.map(({ sql, description }, i) => {
         return (
           <div key={i} className={styles.example}>
-            <p>{description}</p>
+            <Highlight highlight={search.split(/\s+/)}>{description}</Highlight>
             <SQL code={sql} />{" "}
             <Button
               size="xs"
