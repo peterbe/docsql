@@ -3,18 +3,27 @@ import { Button, Grid, Text } from "@mantine/core";
 import { Kbd } from "@mantine/core";
 import styles from "../styles/code-input.module.css";
 
+import { ToolbarMenu } from "./toolbar-menu";
+import { SavedQuery, ToolbarMenuOption } from "../types";
+
 export function CodeInput({
   onChange,
   query,
   typedQuery,
   setTypedQuery,
   hasError,
+  savedQueries,
+  currentMenu,
+  toggleMenu,
 }: {
   onChange: (query: string) => void;
   query: string;
   typedQuery: string;
   setTypedQuery: (query: string) => void;
   hasError: boolean;
+  savedQueries: SavedQuery[];
+  currentMenu: ToolbarMenuOption;
+  toggleMenu: (menu: ToolbarMenuOption) => void;
 }) {
   const formSubmit = useCallback(() => {
     onChange(typedQuery.trim());
@@ -60,16 +69,31 @@ export function CodeInput({
         {query}
       </textarea>
 
-      <Button
-        size="lg"
-        type="submit"
-        disabled={typedQuery.trim() === query}
-        color={
-          typedQuery.trim() !== query ? "green" : hasError ? "red" : undefined
-        }
-      >
-        Run
-      </Button>
+      <Grid>
+        <Grid.Col span={6}>
+          <Button
+            // size="lg"
+            type="submit"
+            disabled={typedQuery.trim() === query}
+            color={
+              typedQuery.trim() !== query
+                ? "green"
+                : hasError
+                ? "red"
+                : undefined
+            }
+          >
+            Run
+          </Button>
+        </Grid.Col>
+        <Grid.Col span={6}>
+          <ToolbarMenu
+            toggle={toggleMenu}
+            current={currentMenu}
+            savedQueries={savedQueries}
+          />
+        </Grid.Col>
+      </Grid>
     </form>
   );
 }

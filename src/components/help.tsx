@@ -1,3 +1,6 @@
+import { Title } from "@mantine/core";
+import { Container } from "@mantine/core";
+
 import type { Page } from "../types";
 
 export function ShowHelp({ pages }: { pages: Page[] }) {
@@ -27,10 +30,8 @@ export function ShowHelp({ pages }: { pages: Page[] }) {
     });
 
   return (
-    <div>
-      <p>
-        <b>Possible keys</b>
-      </p>
+    <Container fluid padding="lg">
+      <Title order={4}>Possible keys</Title>
       <ul>
         {allKeys.map(({ name, type }) => (
           <li key={name}>
@@ -39,9 +40,7 @@ export function ShowHelp({ pages }: { pages: Page[] }) {
         ))}
       </ul>
 
-      <p>
-        <b>Read the docs</b>
-      </p>
+      <Title order={4}>Read the docs</Title>
       <p>
         The most important documentation is{" "}
         <a
@@ -60,6 +59,6 @@ export function ShowHelp({ pages }: { pages: Page[] }) {
         <code>myString.length.toLocaleString()</code>, and in AlaSQL that
         becomes <code>SELECT mystring-&gt;length-&gt;toLocaleString()</code>.
       </p>
-    </div>
+    </Container>
   );
 }

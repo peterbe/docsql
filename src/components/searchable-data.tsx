@@ -3,7 +3,13 @@ import { useRouter } from "next/router";
 import alasql from "alasql";
 import { Alert } from "@mantine/core";
 
-import type { PagesAndMeta, SavedQuery, Records, Page } from "../types";
+import type {
+  PagesAndMeta,
+  SavedQuery,
+  Records,
+  Page,
+  ToolbarMenuOption,
+} from "../types";
 
 import { Toolbar } from "./toolbar";
 import { ShowFoundRecords } from "./found-records";
@@ -135,6 +141,14 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
     }
   }, [query, foundRecords, queryError]);
 
+  const [currentMenu, setCurrentMenu] = useState<ToolbarMenuOption>("");
+
+  function toggleMenu(key: ToolbarMenuOption) {
+    setCurrentMenu((prevState) => {
+      return prevState === key ? "" : key;
+    });
+  }
+
   return (
     <div>
       {queryError && (
@@ -164,8 +178,12 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
             }),
           ]);
         }}
+        currentMenu={currentMenu}
+        toggleMenu={toggleMenu}
       />
-      {foundRecords !== null && <ShowFoundRecords records={foundRecords} />}
+      {foundRecords !== null && currentMenu === "" && (
+        <ShowFoundRecords records={foundRecords} />
+      )}
       <AboutMetadata meta={data.meta} />
     </div>
   );
@@ -179,6 +197,8 @@ function CodeInputAndToolbar({
   savedQueries,
   deleteSavedQuery,
   starQuery,
+  currentMenu,
+  toggleMenu,
 }: {
   query: string;
   setQuery: (x: string) => void;
@@ -187,8 +207,11 @@ function CodeInputAndToolbar({
   savedQueries: SavedQuery[];
   deleteSavedQuery: (query: string) => void;
   starQuery: (query: string) => void;
+  currentMenu: ToolbarMenuOption;
+  toggleMenu: (menu: ToolbarMenuOption) => void;
 }) {
   const [typedQuery, setTypedQuery] = useState(query);
+
   return (
     <div>
       <CodeInput
@@ -199,8 +222,13 @@ function CodeInputAndToolbar({
           setQuery(value.trim());
         }}
         hasError={Boolean(queryError)}
+        savedQueries={savedQueries}
+        currentMenu={currentMenu}
+        toggleMenu={toggleMenu}
       />
       <Toolbar
+        currentMenu={currentMenu}
+        toggleMenu={toggleMenu}
         pages={pages}
         savedQueries={savedQueries}
         loadQuery={(query: string) => {
