@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from "react";
-import { Button, Grid } from "@mantine/core";
+import { Button, Grid, Text } from "@mantine/core";
 import { Kbd } from "@mantine/core";
 import styles from "../styles/code-input.module.css";
 
@@ -43,6 +43,10 @@ export function CodeInput({
         formSubmit();
       }}
     >
+      <Text size="sm" align="right">
+        <b>Tip!</b> Use <Kbd>⌘</Kbd>-<Kbd>Enter</Kbd> to run the query when
+        focus is inside textarea
+      </Text>
       <textarea
         className={styles.textarea}
         rows={Math.min(100, Math.max(4, typedQuery.split("\n").length))}
@@ -56,30 +60,16 @@ export function CodeInput({
         {query}
       </textarea>
 
-      <Grid>
-        <Grid.Col span={6}>
-          <Button
-            size="lg"
-            type="submit"
-            disabled={typedQuery.trim() === query}
-            color={
-              typedQuery.trim() !== query
-                ? "success"
-                : hasError
-                ? "error"
-                : undefined
-            }
-          >
-            Run
-          </Button>
-        </Grid.Col>
-        <Grid.Col span={6}>
-          <small>
-            <b>Tip!</b> Use <Kbd>⌘</Kbd>
-            <Kbd>Enter</Kbd> to submit query when focus is inside textarea
-          </small>
-        </Grid.Col>
-      </Grid>
+      <Button
+        size="lg"
+        type="submit"
+        disabled={typedQuery.trim() === query}
+        color={
+          typedQuery.trim() !== query ? "green" : hasError ? "red" : undefined
+        }
+      >
+        Run
+      </Button>
     </form>
   );
 }

@@ -17,7 +17,7 @@ function firstString(thing: string[] | string) {
 }
 
 const DEFAULT_QUERY =
-  "SELECT title, length(title) as title_title FROM ? ORDER BY 2 DESC LIMIT 10";
+  "SELECT title, length(title) AS length ​FROM ? ORDER BY 2 DESC LIMIT 10";
 
 export function SearchableData({ data }: { data: PagesAndMeta }) {
   const router = useRouter();

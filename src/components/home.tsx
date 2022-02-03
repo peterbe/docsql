@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-// import Head from "next/head";
 import useSWR from "swr";
 
 import type { PagesAndMeta } from "../types";
@@ -21,15 +20,6 @@ export const Home: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      {/* <Head>
-        <title>Docs Traits</title>
-        <meta
-          name="description"
-          content="Getting an overview of your Markdown content"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head> */}
-
       <main className={styles.main}>
         {error && (
           <div className={data ? styles.reloading_error : styles.loading_error}>

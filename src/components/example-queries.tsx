@@ -48,6 +48,12 @@ const EXAMPLES = [
     sql: "SELECT title FROM ? ORDER BY RANDOM() LIMIT 10",
     description: "10 random titles",
   },
+  {
+    sql:
+      "SELECT _id, wordCount, textLength, round(textLength / wordCount, 2) FROM ? where wordCount > 10" +
+      "ORDER BY 4 DESC LIMIT 25",
+    description: "Order average longest words rounded to 2 significant figures",
+  },
 ];
 
 export function ExampleQueries({
@@ -70,14 +76,6 @@ export function ExampleQueries({
     <div>
       <Grid>
         <Grid.Col span={6}>
-          <p>
-            <small>
-              These are static examples they might not work with <i>your</i>{" "}
-              data.
-            </small>
-          </p>
-        </Grid.Col>
-        <Grid.Col span={6}>
           <form>
             <TextInput
               type="search"
@@ -87,6 +85,14 @@ export function ExampleQueries({
               placeholder="Search..."
             />
           </form>
+        </Grid.Col>
+        <Grid.Col span={6}>
+          <p>
+            <small>
+              These are static examples they might not work with <i>your</i>{" "}
+              data.
+            </small>
+          </p>
         </Grid.Col>
       </Grid>
 

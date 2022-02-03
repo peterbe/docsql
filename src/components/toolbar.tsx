@@ -6,7 +6,8 @@ import { ShowHelp } from "./help";
 import { ShowSavedQueries } from "./saved-queries";
 import { ExampleQueries } from "./example-queries";
 
-type OpenOptions = "help" | "saved" | "example_queries" | "";
+import type { ToolbarMenuOption } from "../types";
+
 export function Toolbar({
   pages,
   savedQueries,
@@ -20,9 +21,9 @@ export function Toolbar({
   deleteSavedQuery: (query: string) => void;
   starQuery: (query: string) => void;
 }) {
-  const [open, setOpen] = useState<OpenOptions>("");
+  const [open, setOpen] = useState<ToolbarMenuOption>("");
 
-  function toggle(key: OpenOptions) {
+  function toggle(key: ToolbarMenuOption) {
     setOpen((prevState) => {
       return prevState === key ? "" : key;
     });
@@ -53,7 +54,7 @@ export function Toolbar({
 
         <Button
           type="button"
-          onClick={() => toggle("example_queries")}
+          onClick={() => toggle("examples")}
           size="sm"
           color="secondary"
         >
@@ -77,7 +78,7 @@ export function Toolbar({
           starQuery={starQuery}
         />
       )}
-      {open === "example_queries" && (
+      {open === "examples" && (
         <ExampleQueries
           loadQuery={(query: string) => {
             loadQuery(query);

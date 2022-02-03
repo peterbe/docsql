@@ -31,3 +31,5 @@ export interface OpenFile {
   isTerminalEditor?: boolean;
   error?: string;
 }
+
+export type ToolbarMenuOption = "" | "help" | "saved" | "examples";
