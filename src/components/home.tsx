@@ -23,14 +23,11 @@ export const Home: NextPage = () => {
     <div className={styles.container}>
       <main className={styles.main}>
         {error && (
-          <Alert color="red">
+          <Alert color="red" title="Loading error">
             <div
               className={data ? styles.reloading_error : styles.loading_error}
             >
-              <p>
-                <b>Loading error:</b> <code>{error.toString()}</code>
-              </p>
-
+              <code>{error.toString()}</code>
               {data && <p>Showing &quot;old&quot; data.</p>}
             </div>
           </Alert>
