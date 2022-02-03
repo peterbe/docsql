@@ -58,9 +58,10 @@ export function CodeInput({
       </Text>
       <textarea
         className={styles.textarea}
+        spellCheck="false"
+        autoFocus
         rows={Math.min(100, Math.max(4, typedQuery.split("\n").length))}
         ref={textareaRef}
-        // cols={100}
         value={typedQuery}
         onChange={(event) => {
           setTypedQuery(event.target.value);
@@ -72,7 +73,6 @@ export function CodeInput({
       <Grid>
         <Grid.Col span={6}>
           <Button
-            // size="lg"
             type="submit"
             disabled={typedQuery.trim() === query}
             color={
