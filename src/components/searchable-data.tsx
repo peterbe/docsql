@@ -23,7 +23,7 @@ function firstString(thing: string[] | string) {
 }
 
 const DEFAULT_QUERY =
-  "SELECT title, length(title) AS length ​FROM ? ORDER BY 2 DESC LIMIT 10";
+  "SELECT title, length(title) AS length FROM ? ORDER BY 2 DESC LIMIT 10";
 
 export function SearchableData({ data }: { data: PagesAndMeta }) {
   const router = useRouter();
@@ -34,7 +34,6 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
   const [queryError, setQueryError] = useState<Error | null>(null);
 
   const [query, setQuery] = useState(defaultQuery);
-  // const [typedQuery, setTypedQuery] = useState(query);
 
   const { pages } = data;
 

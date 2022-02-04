@@ -16,6 +16,9 @@ export const Home: NextPage = () => {
         return await res.json();
       }
       throw new Error(`${res.status} on ${url}`);
+    },
+    {
+      revalidateOnFocus: process.env.NODE_ENV === "development",
     }
   );
 

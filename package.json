@@ -6,7 +6,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next export"
+    "export": "next export",
+    "build:export": "npm run build && npm run export",
+    "run": "node run-next.mjs",
+    "build:export:run": "npm run build:export && npm run run"
   },
   "dependencies": {
     "@mantine/core": "3.6.4",
@@ -18,10 +21,12 @@
     "gray-matter": "4.0.3",
     "next": "12.0.9",
     "open-editor": "4.0.0",
+    "polka": "0.5.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-iconly": "2.2.5",
     "react-refractor": "2.1.5",
+    "sirv": "2.0.2",
     "swr": "1.2.0",
     "use-dark-mode": "2.3.1"
   },
