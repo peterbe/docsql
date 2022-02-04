@@ -33,7 +33,7 @@ export function CodeInput({
   const textareaElement = textareaRef.current;
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
-      if (event.key == "Enter" && event.metaKey) {
+      if (event.key === "Enter" && event.metaKey) {
         formSubmit();
       }
     };
