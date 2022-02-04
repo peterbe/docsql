@@ -99,7 +99,7 @@ export function ShowFoundRecords({ records }: { records: Records }) {
                   const value = record[key];
                   return (
                     <td key={key}>
-                      {key === "_id" ? (
+                      {key === "_file" ? (
                         <a
                           href={`#${value}`}
                           onClick={(e) => {

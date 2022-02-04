@@ -1,6 +1,6 @@
 export interface Page {
-  _id: string;
-  _hash: string;
+  _file: string;
+  // _hash: string;
   //   title: string;
   [key: string]: string | number;
 }

@@ -50,7 +50,7 @@ const EXAMPLES = [
   },
   {
     sql:
-      "SELECT _id, wordCount, textLength, round(textLength / wordCount, 2) FROM ? where wordCount > 10" +
+      "SELECT _id, wordCount, size, round(size / wordCount, 2) FROM ? where wordCount > 10" +
       "ORDER BY 4 DESC LIMIT 25",
     description: "Order average longest words rounded to 2 significant figures",
   },

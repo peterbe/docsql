@@ -1,5 +1,6 @@
 {
   "name": "docs-traits",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,12 +12,14 @@
     "run": "node run-next.mjs",
     "build:export:run": "npm run build:export && npm run run"
   },
+  "bin": "run-next.mjs",
   "dependencies": {
     "@mantine/core": "3.6.4",
     "@mantine/hooks": "3.6.4",
     "@mantine/next": "3.6.4",
     "@modulz/radix-icons": "4.0.0",
     "alasql": "1.7.3",
+    "dotenv": "16.0.0",
     "fdir": "5.2.0",
     "gray-matter": "4.0.3",
     "next": "12.0.9",
