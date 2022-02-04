@@ -9,7 +9,7 @@ import styles from "../styles/home.module.css";
 
 export const Home: NextPage = () => {
   const { data, error } = useSWR<PagesAndMeta, Error>(
-    "/api/traits",
+    "/api/docs",
     async (url) => {
       const res = await fetch(url);
       if (res.ok) {

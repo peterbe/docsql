@@ -35,4 +35,4 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-.traitsdb/
+.docsqldb/

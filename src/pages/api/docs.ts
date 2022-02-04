@@ -16,7 +16,7 @@ import { CONTENT_SOURCES } from "../../lib/sources";
 const VERSION = packageInfo.version || "unversioned";
 
 const _excluding = (
-  process.env.TRAITS_EXCLUDING_FILES ||
+  process.env.DOCSQL_EXCLUDING_FILES ||
   `
 README.md
 LICENSE.md
@@ -151,7 +151,7 @@ export default async function handler(
   await dumpDB();
 }
 
-const DB_FOLDER_NAME = ".traitsdb";
+const DB_FOLDER_NAME = ".docsqldb";
 
 async function dumpDB() {
   if (!fs.existsSync(DB_FOLDER_NAME)) fs.mkdirSync(DB_FOLDER_NAME);

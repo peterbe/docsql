@@ -1,4 +1,4 @@
-# Docs Traits
+# docsQL
 
 Getting an overview of your Jamstack Markdown files.
 
