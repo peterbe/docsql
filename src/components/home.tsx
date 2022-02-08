@@ -24,6 +24,7 @@ export const Home: NextPage = () => {
 
   return (
     <div className={styles.container}>
+      <h1 className={styles.heading}>docsQL</h1>
       <main className={styles.main}>
         {error && (
           <Alert color="red" title="Loading error">

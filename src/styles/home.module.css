@@ -1,6 +1,6 @@
 .container {
   /* padding: 0 2rem; */
-  padding: 2rem;
+  padding: 0 2rem;
 }
 
 .main {
@@ -34,4 +34,9 @@
 }
 .reloading_error {
   padding: 1rem;
+}
+
+.heading {
+  margin: 0;
+  opacity: 0.7;
 }

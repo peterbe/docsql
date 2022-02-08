@@ -219,6 +219,7 @@ function CodeInputAndToolbar({
         setTypedQuery={setTypedQuery}
         onChange={(value: string) => {
           setQuery(value.trim());
+          toggleMenu("");
         }}
         hasError={Boolean(queryError)}
         savedQueries={savedQueries}
