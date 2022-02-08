@@ -2,16 +2,16 @@ import fs from "fs";
 import { writeFile } from "fs/promises";
 import path from "path";
 import crypto from "crypto";
-import * as packageInfo from "../../../package.json";
+import packageInfo from "../../../package.json";
 
 import { fdir } from "fdir";
 import matter from "gray-matter";
 
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import type { Page, Meta, PagesAndMeta } from "../../types";
+import type { Page, Meta, PagesAndMeta, Source } from "../../types";
 
-import { CONTENT_SOURCES } from "../../lib/sources";
+import { CONTENT_SOURCES, PLUGINS_SOURCES } from "../../lib/sources";
 
 const VERSION = packageInfo.version || "unversioned";
 
@@ -45,7 +45,15 @@ type Plugin = {
 };
 const plugins: Plugin[] = [];
 for (const filePath of absoluteFilePaths) {
+  // console.log([
+  //   path.relative(filePath, __dirname),
+  //   path.relative(__dirname, filePath),
+  // ]);
+
   const plugin = require("../../../plugins/" + path.basename(filePath));
+  // const plugin = require(path.relative(__dirname, filePath));
+  // const plugin = require(filePath);
+
   const func = plugin.default;
   plugins.push({ func, filePath });
 }
@@ -61,6 +69,7 @@ export default async function handler(
   res: NextApiResponse<PagesAndMeta>
 ) {
   const t0 = new Date();
+  const sources: Source[] = [];
   for (const source of CONTENT_SOURCES) {
     const files = new fdir()
       .crawlWithOptions(source, {
@@ -77,9 +86,13 @@ export default async function handler(
       })
       .sync() as string[];
 
-    console.log(
-      `Found ${files.length.toLocaleString()} .md files in ${source}`
-    );
+    sources.push({ source, files: files.length });
+
+    if (process.env.NODE_ENV === "development") {
+      console.log(
+        `Found ${files.length.toLocaleString()} .md files in ${source}`
+      );
+    }
 
     for (const sourceFilePath of files) {
       // if (!sourceFilePath.endsWith(".md")) continue;
@@ -130,17 +143,12 @@ export default async function handler(
   }
   const t1 = new Date();
 
-  // for (const { func, filePath } of plugins) {
-  //   console.log({ filePath });
-  //   console.log({ RESULT: func("a", "b") });
-  // }
-  // console.log({ RESULT: plugin.default("a", "b") });
-
   const pages = Array.from(DB.values());
 
   const meta: Meta = {
     took: t1.getTime() - t0.getTime(),
     rows: pages.length,
+    sources,
   };
   const ret: PagesAndMeta = {
     pages,

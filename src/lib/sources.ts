@@ -10,4 +10,10 @@ if (CONTENT_SOURCES.length === 0) {
   );
 }
 
+const _plugins = process.env.PLUGINS_SOURCES || "";
+export const PLUGINS_SOURCES = _plugins
+  .split(",")
+  .map((x) => x.trim())
+  .filter(Boolean);
+
 export const EDITOR = process.env.EDITOR || "";

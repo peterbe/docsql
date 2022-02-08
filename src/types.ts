@@ -1,13 +1,17 @@
 export interface Page {
   _file: string;
-  // _hash: string;
-  //   title: string;
   [key: string]: string | number;
+}
+
+export interface Source {
+  source: string;
+  files: number;
 }
 
 export interface Meta {
   took: number;
   rows: number;
+  sources: Source[];
 }
 export interface PagesAndMeta {
   pages: Page[];

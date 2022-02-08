@@ -2,7 +2,10 @@
   margin-top: 30px;
 
 }
-.footer p {
+.footer p, .footer li {
     font-size: 80%;
     opacity: 0.8;
+}
+.more_meta {
+  color: #666;
 }
