@@ -9,13 +9,17 @@ import styles from "../styles/home.module.css";
 
 export const Home: NextPage = () => {
   const { data, error } = useSWR<PagesAndMeta, Error>(
-    "/api/docs",
+    process.env.NODE_ENV === "development" ? "/api/docsproxy" : "/docs.json",
     async (url) => {
       const res = await fetch(url);
       if (res.ok) {
         return await res.json();
       }
-      throw new Error(`${res.status} on ${url}`);
+      let message = `${res.status} on ${url}`;
+      try {
+        message = (await res.json()).error;
+      } catch {}
+      throw new Error(message);
     },
     {
       revalidateOnFocus: process.env.NODE_ENV === "development",
@@ -36,8 +40,6 @@ export const Home: NextPage = () => {
             </div>
           </Alert>
         )}
-        {/* {!error && !data && <div>Loading</div>} */}
-        {/* {!error && !data && <LoadingOverlay visible={true} />} */}
         <LoadingOverlay visible={!error && !data} transitionDuration={500} />
         {data && <SearchableData data={data} />}
       </main>
