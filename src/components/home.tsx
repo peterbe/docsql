@@ -9,7 +9,7 @@ import styles from "../styles/home.module.css";
 
 export const Home: NextPage = () => {
   const { data, error } = useSWR<PagesAndMeta, Error>(
-    "/api/docs",
+    process.env.NODE_ENV === "development" ? "/api/docsproxy" : "/docs.json",
     async (url) => {
       const res = await fetch(url);
       if (res.ok) {
