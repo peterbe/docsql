@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import fs from "fs";
+import path from "path";
 
 // import next from "next";
 import polka from "polka";
@@ -27,9 +28,8 @@ const program = new Command();
 dotenv.config();
 
 const { PORT = 3000, NODE_ENV } = process.env;
-const serve = sirv("out");
 
-const dev = NODE_ENV !== "production";
+// const dev = NODE_ENV !== "production";
 // const app = next({ dev });
 // const handle = app.getRequestHandler();
 
@@ -37,6 +37,7 @@ program
   .version(packageInfo.version, "--version", "output the current version")
   .description("Analyze all the Markdown files with SQL")
   .option("-v, --verbose", "Verbose outputs")
+  .option("--analyze-only", "Generate the out.json without starting a server")
   .arguments("[directories...]", "Specific directories to analyze")
   .parse(process.argv);
 
@@ -112,7 +113,24 @@ async function main(opts, sources) {
     pages: allDocs,
     meta,
   };
-  fs.writeFileSync("out/docs.json", JSON.stringify(combined, null, 2));
+  const outRoot = "out";
+
+  // When doing local dev, using `npm run dev`, the `out` directory
+  // might not have been created.
+  if (!fs.existsSync(outRoot)) {
+    fs.mkdirSync(outRoot);
+  }
+
+  fs.writeFileSync(
+    path.join(outRoot, "docs.json"),
+    JSON.stringify(combined, null, 2)
+  );
+
+  if (opts.analyzeOnly) {
+    return;
+  }
+
+  const serve = sirv(outRoot);
 
   // app.prepare().then(() => {
   polka()

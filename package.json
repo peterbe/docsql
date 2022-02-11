@@ -3,8 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "analyze": "npm run run -- --analyze-only",
+    "dev": "npm run analyze && next dev",
     "build": "next build",
+    "clear": "rm -rf .next out",
     "start": "next start",
     "lint": "next lint",
     "export": "next export",
