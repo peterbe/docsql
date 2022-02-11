@@ -1,6 +1,4 @@
-// import path from "path";
-
-export default function plugin({ page, content }) {
+export default function commonheadings({ content }) {
   const h2s = (content.match(/^##\s/gm) || []).length;
   const h3s = (content.match(/^###\s/gm) || []).length;
   return {

@@ -73,8 +73,8 @@ async function main(opts, sources) {
   const pluginFiles = getAllPluginFiles(["plugins"]);
   const pluginsHash = getHashFiles(pluginFiles);
   console.log(`${pluginFiles.length.toLocaleString()} plugins found.`);
+
   const plugins = await getAllPlugins(pluginFiles);
-  console.log(plugins);
 
   const hashCurry = (lastBit) => `v${VERSION}.${pluginsHash}.${lastBit}`;
   const allDocs = [];
@@ -121,12 +121,11 @@ async function main(opts, sources) {
     fs.mkdirSync(outRoot);
   }
 
-  fs.writeFileSync(
-    path.join(outRoot, "docs.json"),
-    JSON.stringify(combined, null, 2)
-  );
+  const outFile = path.join(outRoot, "docs.json");
+  fs.writeFileSync(outFile, JSON.stringify(combined, null, 2));
 
   if (opts.analyzeOnly) {
+    console.log(`Created ${path.resolve(outFile)}`);
     return;
   }
 
