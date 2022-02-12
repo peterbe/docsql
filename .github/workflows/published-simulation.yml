@@ -44,6 +44,13 @@ jobs:
       - name: What was built?
         run: ls -lh
 
+      - name: Extract tarball to temp directory
+        run: |
+          TARBALL=`ls docsql-*.tgz`
+          echo $TARBALL
+          tar -xf $TARBALL --directory /tmp/docsql
+          npx /tmp/docsql
+
 
       # - name: Serve (in the background)
       #   env:
