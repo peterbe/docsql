@@ -52,11 +52,11 @@ jobs:
           TARBALL=`ls docsql-*.tgz`
           echo $TARBALL
           TEMP_DIR=`mktemp -d`
-          mkdir $TEMP_DIR/docsql
-          tar -xf $TARBALL --directory $TEMP_DIR/docsql
+          # mkdir $TEMP_DIR/docsql
+          tar -xf $TARBALL --directory $TEMP_DIR
           ls -l $TEMP_DIR
-          ls -l $TEMP_DIR/docsql
-          npx $TEMP_DIR/docsql
+          ls -l $TEMP_DIR/package
+          npx $TEMP_DIR/package
 
 
       # - name: Serve (in the background)
