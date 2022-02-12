@@ -19,7 +19,13 @@ jobs:
         run: npm ci
 
       - name: Analyze
-        run: npm run analyze --help
+        run: |
+          node cli/index.mjs \
+            --plugins example-plugins/my-docsql-plugins \
+            --analyze-only \
+            example-directories/my-jamstack-site
+
+          cat out/docs.json
 
       - name: Check what was generated
         uses: actions/github-script@v5
