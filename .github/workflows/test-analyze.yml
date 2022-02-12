@@ -32,6 +32,12 @@ jobs:
         with:
           script: |
             const fs = require('fs')
+            const assert = require('assert')
 
             const all = JSON.parse(fs.readFileSync('out/docs.json'))
-            console.log(all)
+
+            assert(all.meta)
+            assert(all.meta.took)
+            assert(all.meta.rows)
+            assert(all.pages)
+            assert(Array.isArray(all.pages))
