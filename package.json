@@ -17,6 +17,7 @@
   "bin": "cli/index.mjs",
   "files": [
     "/out",
+    "/lib",
     "/cli"
   ],
   "dependencies": {
