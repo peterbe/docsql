@@ -46,6 +46,28 @@ export function ShowHelp({ pages }: { pages: Page[] }) {
 
       <Container style={{ margin: 40 }}>
         <Paper padding="md" shadow="sm" withBorder>
+          <Title order={4}>SQL is case-insensitive, but keys aren't</Title>
+          <p>
+            <code>SELECT title FROM ? ORDER BY textLength LIMIT 10</code>
+            <br />
+            <b style={{ paddingLeft: 170 }}>==</b>
+            <br />
+            <code>Select title from ? order bY textLength limiT 10</code>
+          </p>
+          <p>
+            <b>But...</b>
+            <br />
+            <code>SELECT title FROM ? ORDER BY textLength LIMIT 10</code>
+            <br />
+            <b style={{ paddingLeft: 170, color: "red" }}>!=</b>
+            <br />
+            <code>SELECT TiTLe FROM ? ORDER BY TextlengTH LIMIT 10</code>
+          </p>
+        </Paper>
+      </Container>
+
+      <Container style={{ margin: 40 }}>
+        <Paper padding="md" shadow="sm" withBorder>
           <Title order={4}>Read the docs</Title>
           <p>
             The most important documentation is{" "}

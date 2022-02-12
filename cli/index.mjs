@@ -38,6 +38,7 @@ program
   .description("Analyze all the Markdown files with SQL")
   .option("-v, --verbose", "Verbose outputs")
   .option("--analyze-only", "Generate the out.json without starting a server")
+  .option("--plugins [directories...]", "Directory with your own .mjs plugins")
   .arguments("[directories...]", "Specific directories to analyze")
   .parse(process.argv);
 
@@ -68,9 +69,15 @@ async function main(opts, sources) {
 
   // const hashCurry = (lastBit: string) => `v${VERSION}.${pluginsHash}.${lastBit}`;
 
+  const pluginsDirectories = ["builtin-plugins"];
+  if (opts.plugins) {
+    pluginsDirectories.push(...opts.plugins);
+  }
+
   const t0 = new Date();
   // const { plugins, pluginsHash } = await getAllPlugins(["plugins"]);
-  const pluginFiles = getAllPluginFiles(["plugins"]);
+
+  const pluginFiles = getAllPluginFiles(pluginsDirectories);
   const pluginsHash = getHashFiles(pluginFiles);
   console.log(`${pluginFiles.length.toLocaleString()} plugins found.`);
 
