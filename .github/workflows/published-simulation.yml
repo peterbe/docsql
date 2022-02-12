@@ -46,11 +46,17 @@ jobs:
 
       - name: Extract tarball to temp directory
         run: |
+
+          set -ex
+
           TARBALL=`ls docsql-*.tgz`
           echo $TARBALL
           TEMP_DIR=`mktemp -d`
-          tar -xf $TARBALL --directory $TEMP_DIR
-          npx $TEMP_DIR
+
+          tar -xf $TARBALL --directory $TEMP_DIR/docsql
+          ls -l $TEMP_DIR
+          ls -l $TEMP_DIR/docsql
+          npx $TEMP_DIR/docsql
 
 
       # - name: Serve (in the background)
