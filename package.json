@@ -15,6 +15,10 @@
     "build:export:run": "npm run build:export && npm run run"
   },
   "bin": "cli/index.mjs",
+  "files": [
+    "/out",
+    "/cli"
+  ],
   "dependencies": {
     "@mantine/core": "3.6.6",
     "@mantine/hooks": "3.6.6",
