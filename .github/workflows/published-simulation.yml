@@ -55,6 +55,7 @@ jobs:
           # mkdir $TEMP_DIR/docsql
           tar -xf $TARBALL --directory $TEMP_DIR
           cd $TEMP_DIR/package
+          npm install
           npx .
 
 
