@@ -33,6 +33,7 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           cache: npm
+
       - name: Install dependencies
         run: npm ci
 
@@ -46,3 +47,28 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Export
+        run: npm run export
+
+      - name: Start server
+        env:
+          # It's usually the default for `serve` but good to be explicit
+          PORT: 3000
+        run: |
+          npm run run > /tmp/stdout.log 2> /tmp/stderr.log &
+
+      - name: Check that the server started
+        run: curl --retry-connrefused --retry 3 -I http://localhost:3000/
+
+      - name: View the home page
+        run: |
+          curl -v --fail http://localhost:3000/
+
+      - name: Debug any server outputs
+        if: failure()
+        run: |
+          echo "____STDOUT____"
+          cat /tmp/stdout.log
+          echo "____STDERR____"
+          cat /tmp/stderr.log

@@ -1,0 +1,31 @@
+name: Test
+
+on:
+  pull_request:
+
+jobs:
+  analyze-sample-stuff:
+    name: Test with Node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v2
+      - name: Set up Node ${{ matrix.node }}
+        uses: actions/setup-node@v2
+        with:
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Analyze
+        run: npm run analyze --help
+
+      - name: Check what was generated
+        uses: actions/github-script@v5
+        with:
+          script: |
+            import fs from 'fs'
+
+            const all = JSON.parse(fs.readFileSync('out/docs.json'))
+            console.log(all)
