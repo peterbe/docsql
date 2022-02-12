@@ -56,6 +56,7 @@ jobs:
           # It's usually the default for `serve` but good to be explicit
           PORT: 3000
         run: |
+          echo CONTENT_SOURCES=example-directories/my-jamstack-site >> .env
           npm run run > /tmp/stdout.log 2> /tmp/stderr.log &
 
       - name: Check that the server started
