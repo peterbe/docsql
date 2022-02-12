@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  test:
+  simulate-publishing:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repo
@@ -54,9 +54,8 @@ jobs:
           TEMP_DIR=`mktemp -d`
           # mkdir $TEMP_DIR/docsql
           tar -xf $TARBALL --directory $TEMP_DIR
-          ls -l $TEMP_DIR
-          ls -l $TEMP_DIR/package
-          npx $TEMP_DIR/package
+          cd $TEMP_DIR/package
+          npx .
 
 
       # - name: Serve (in the background)

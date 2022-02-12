@@ -2,6 +2,7 @@
 
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 
 // import next from "next";
 import polka from "polka";
@@ -28,6 +29,8 @@ const program = new Command();
 dotenv.config();
 
 const { PORT = 3000, NODE_ENV } = process.env;
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // const dev = NODE_ENV !== "production";
 // const app = next({ dev });
@@ -69,7 +72,7 @@ async function main(opts, sources) {
 
   // const hashCurry = (lastBit: string) => `v${VERSION}.${pluginsHash}.${lastBit}`;
 
-  const pluginsDirectories = ["builtin-plugins"];
+  const pluginsDirectories = [path.join(__dirname, "..", "builtin-plugins")];
   if (opts.plugins) {
     pluginsDirectories.push(...opts.plugins);
   }
