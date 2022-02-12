@@ -25,7 +25,7 @@ jobs:
         uses: actions/github-script@v5
         with:
           script: |
-            import fs from 'fs'
+            const fs = require('fs')
 
             const all = JSON.parse(fs.readFileSync('out/docs.json'))
             console.log(all)
