@@ -49,6 +49,8 @@ jobs:
 
           ls -l
           pwd
+          echo ${{ env.GITHUB_WORKSPACE }}
+          echo $GITHUB_WORKSPACE
 
           set -ex
 
@@ -60,7 +62,7 @@ jobs:
           cd $TEMP_DIR/package
 
           npm install
-          npx . ~/example-directories/
+          npx . $GITHUB_WORKSPACE/example-directories/
 
 
       # - name: Serve (in the background)
