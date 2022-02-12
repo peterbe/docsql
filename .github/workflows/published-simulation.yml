@@ -48,8 +48,9 @@ jobs:
         run: |
           TARBALL=`ls docsql-*.tgz`
           echo $TARBALL
-          tar -xf $TARBALL --directory /tmp/docsql
-          npx /tmp/docsql
+          TEMP_DIR=`mktemp -d`
+          tar -xf $TARBALL --directory $TEMP_DIR
+          npx $TEMP_DIR
 
 
       # - name: Serve (in the background)
