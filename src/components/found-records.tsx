@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import type { Records } from "../types";
+
+import type { Records, OpenFile } from "../types";
 import styles from "../styles/found-records.module.css";
 import useSWR from "swr";
-import type { OpenFile } from "../types";
+import { DownloadFoundRecords } from "./download-found-records";
 
 export function ShowFoundRecords({ records }: { records: Records }) {
   const [opening, setOpening] = useState<null | string>(null);
@@ -120,6 +121,8 @@ export function ShowFoundRecords({ records }: { records: Records }) {
           })}
         </tbody>
       </table>
+      {records.length > 0 && <DownloadFoundRecords records={records} />}
+
       {records.length > MAX_ROWS && (
         <p>
           <small>
