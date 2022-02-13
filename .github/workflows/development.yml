@@ -1,4 +1,4 @@
-name: Published simulation
+name: Test development
 
 on:
   push:
