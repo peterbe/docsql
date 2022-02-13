@@ -40,11 +40,7 @@ jobs:
 
           set -ex
 
-          tar -zxvf example-directories/github-docs-sample.tgz
-          echo "What's hree?"
-          ls -l
-          echo "What's in example-directorie"
-          ls example-directories
+          tar -zxf example-directories/github-docs-sample.tgz
           npm run analyze -- github-docs-sample/
           ls -ltr out
 
