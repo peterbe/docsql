@@ -38,9 +38,12 @@ jobs:
 
       - name: Analyze and generate JSON file
         run: |
+
+          set -ex
+
           tar -zxvf example-directories/github-docs-sample.tgz
-          ls -ltr
-          ls -ltr example-directories
+          npm run analyze -- example-directories/github-docs-sample/
+          ls -ltr out
 
       # - name: Deploy 🚀
       #   uses: JamesIves/github-pages-deploy-action@v4.2.3
