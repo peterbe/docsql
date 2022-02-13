@@ -46,7 +46,7 @@ export function ShowHelp({ pages }: { pages: Page[] }) {
 
       <Container style={{ margin: 40 }}>
         <Paper padding="md" shadow="sm" withBorder>
-          <Title order={4}>SQL is case-insensitive, but keys aren't</Title>
+          <Title order={4}>SQL is case-insensitive, but keys aren&apos;t</Title>
           <p>
             <code>SELECT title FROM ? ORDER BY textLength LIMIT 10</code>
             <br />

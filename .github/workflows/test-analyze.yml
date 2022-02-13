@@ -1,0 +1,43 @@
+name: Test analyze
+
+on:
+  pull_request:
+
+jobs:
+  analyze-sample-stuff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v2
+
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Analyze
+        run: |
+          node cli/index.mjs \
+            --plugins example-plugins/my-docsql-plugins \
+            --analyze-only \
+            example-directories/my-jamstack-site
+
+          cat out/docs.json
+
+      - name: Check what was generated
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const fs = require('fs')
+            const assert = require('assert')
+
+            const all = JSON.parse(fs.readFileSync('out/docs.json'))
+
+            assert(all.meta)
+            assert(all.meta.took)
+            assert(all.meta.rows)
+            assert(all.pages)
+            assert(Array.isArray(all.pages))
