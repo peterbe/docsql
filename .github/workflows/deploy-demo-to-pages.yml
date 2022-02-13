@@ -47,6 +47,7 @@ jobs:
           npm run analyze -- github-docs-sample/
 
       - name: Debug what was built
+        run: |
           ls -ltr out
           cat out/index.html
 
