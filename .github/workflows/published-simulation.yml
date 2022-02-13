@@ -44,49 +44,29 @@ jobs:
       - name: What was built?
         run: ls -lh
 
-      - name: Extract tarball to temp directory
+      - name: Extract and run from tarball
+        env:
+          # It's usually the default for `serve` but good to be explicit
+          PORT: 3000
         run: |
-
-          ls -l
-          pwd
-          echo ${{ env.GITHUB_WORKSPACE }}
-          echo $GITHUB_WORKSPACE
-
           set -ex
 
           TARBALL=`ls docsql-*.tgz`
           echo $TARBALL
           TEMP_DIR=`mktemp -d`
-          # mkdir $TEMP_DIR/docsql
           tar -xf $TARBALL --directory $TEMP_DIR
           cd $TEMP_DIR/package
 
           npm install
-          npx . $GITHUB_WORKSPACE/example-directories/
+          npx . $GITHUB_WORKSPACE/example-directories > /tmp/stdout.log 2> /tmp/stderr.log &
 
+      - name: Check that the server started
+        run: curl --retry-connrefused --retry 3 -I http://localhost:3000/
 
-      # - name: Serve (in the background)
-      #   env:
-      #     # It's usually the default for `serve` but good to be explicit
-      #     PORT: 3000
-      #   run: |
-      #     npm run serve > /tmp/stdout.log 2> /tmp/stderr.log &
-
-      # - name: Check that the server started
-      #   run: curl --retry-connrefused --retry 3 -I http://localhost:3000/
-
-      # - name: View the home page
-      #   run: |
-
-      #     curl -v --fail http://localhost:3000/
-      #     # XXX Some Playright or jest tests?
-      #     curl --fail http://localhost:3000/github/docs-internal
-      #     curl --fail http://localhost:3000/github/docs
-
-      # - name: Debug any server outputs
-      #   if: failure()
-      #   run: |
-      #     echo "____STDOUT____"
-      #     cat /tmp/stdout.log
-      #     echo "____STDERR____"
-      #     cat /tmp/stderr.log
+      - name: Debug any server outputs
+        if: failure()
+        run: |
+          echo "____STDOUT____"
+          cat /tmp/stdout.log
+          echo "____STDERR____"
+          cat /tmp/stderr.log
