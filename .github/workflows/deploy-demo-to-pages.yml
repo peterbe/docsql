@@ -2,6 +2,7 @@ name: Build demo to GitHub Pages
 
 on:
   workflow_dispatch:
+  pull_request: # XXX TEMP
   push:
     branches:
       - main
@@ -35,8 +36,14 @@ jobs:
       - name: Export
         run: npm run export
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.2.3
-        with:
-          branch: gh-pages
-          folder: out
+      - name: Analyze and generate JSON file
+        run: |
+          tar -zxvf example-directories/github-docs-sample.tgz
+          ls -ltr
+          ls -ltr example-directories
+
+      # - name: Deploy 🚀
+      #   uses: JamesIves/github-pages-deploy-action@v4.2.3
+      #   with:
+      #     branch: gh-pages
+      #     folder: out
