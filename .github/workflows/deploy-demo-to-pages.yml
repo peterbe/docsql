@@ -45,7 +45,10 @@ jobs:
 
           tar -zxf example-directories/github-docs-sample.tgz
           npm run analyze -- github-docs-sample/
+
+      - name: Debug what was built
           ls -ltr out
+          cat out/index.html
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.3
