@@ -1,7 +1,6 @@
 {
   "name": "docsql",
   "version": "0.0.4",
-  "private": true,
   "scripts": {
     "analyze": "npm run run -- --analyze-only",
     "dev": "npm run analyze && next dev",
