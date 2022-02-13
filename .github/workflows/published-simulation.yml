@@ -1,0 +1,69 @@
+name: Published simulation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  simulate-publishing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Cache nextjs build
+        uses: actions/cache@v2
+        with:
+          path: .next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-
+
+      - name: Build
+        run: npm run build
+
+      - name: Export
+        run: npm run export
+
+      - name: Package
+        run: npm pack
+
+      - name: What was built?
+        run: ls -lh
+
+      - name: Extract and run from tarball
+        env:
+          # It's usually the default for `serve` but good to be explicit
+          PORT: 3000
+        run: |
+          set -ex
+
+          TARBALL=`ls docsql-*.tgz`
+          echo $TARBALL
+          TEMP_DIR=`mktemp -d`
+          tar -xf $TARBALL --directory $TEMP_DIR
+          cd $TEMP_DIR/package
+
+          npm install
+          npx . $GITHUB_WORKSPACE/example-directories > /tmp/stdout.log 2> /tmp/stderr.log &
+
+      - name: Check that the server started
+        run: curl --retry-connrefused --retry 3 -I http://localhost:3000/
+
+      - name: Debug any server outputs
+        if: failure()
+        run: |
+          echo "____STDOUT____"
+          cat /tmp/stdout.log
+          echo "____STDERR____"
+          cat /tmp/stderr.log
