@@ -16,9 +16,6 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v2
         with:
-          # With v17, as of Nov 2021, you get
-          # Error: error:0308010C:digital envelope routines::unsupported
-          # node-version: 16
           cache: npm
 
       - name: Install dependencies
