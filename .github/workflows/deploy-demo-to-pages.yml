@@ -26,7 +26,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: .next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('package*.json') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-
 
@@ -41,7 +41,11 @@ jobs:
 
           set -ex
 
-          tar -zxvf example-directories/github-docs-sample.tgz
+          tar -zxvf example-directories/github-docs-sample.tgz -C example-directories/github-docs-sample
+          echo "What's hree?"
+          ls -l
+          echo "What's in example-directorie"
+          ls example-directories
           npm run analyze -- example-directories/github-docs-sample/
           ls -ltr out
 
