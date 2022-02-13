@@ -27,7 +27,6 @@
     "dotenv": "16.0.0",
     "fdir": "5.2.0",
     "gray-matter": "4.0.3",
-    "next": "12.0.10",
     "open-editor": "4.0.0",
     "polka": "0.5.2",
     "sirv": "2.0.2"
@@ -43,6 +42,7 @@
     "@types/refractor": "3.0.2",
     "eslint": "8.8.0",
     "eslint-config-next": "12.0.10",
+    "next": "12.0.10",
     "prettier": "2.5.1",
     "typescript": "4.5.5",
     "react": "17.0.2",
