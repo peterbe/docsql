@@ -1,0 +1,40 @@
+name: Test development
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  simulate-publishing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run development
+        env:
+          PORT: 3000
+        run: |
+          echo CONTENT_SOURCES=example-directories/my-jamstack-site >> .env
+          npm run dev > /tmp/stdout.log 2> /tmp/stderr.log &
+
+      - name: Check that the server started
+        run: curl --retry-connrefused --retry 3 -I http://localhost:3000/
+
+      - name: Debug any server outputs
+        if: failure()
+        run: |
+          echo "____STDOUT____"
+          cat /tmp/stdout.log
+          echo "____STDERR____"
+          cat /tmp/stderr.log

@@ -38,9 +38,6 @@ jobs:
       - name: Package
         run: npm pack
 
-      - name: What was built?
-        run: ls -lh
-
       - name: Extract and run from tarball
         env:
           # It's usually the default for `serve` but good to be explicit
