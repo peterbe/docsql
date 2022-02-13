@@ -18165,7 +18165,7 @@
     }
   ],
   "meta": {
-    "took": 341,
+    "took": 237,
     "rows": 688,
     "sources": [
       "github-docs-sample/"
