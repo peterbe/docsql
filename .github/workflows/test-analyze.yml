@@ -28,7 +28,7 @@ jobs:
           cat out/docs.json
 
       - name: Check what was generated
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         with:
           script: |
             const fs = require('fs')
