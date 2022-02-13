@@ -6,6 +6,9 @@ on:
     branches:
       - main
 
+env:
+  GH_PAGES: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -42,7 +45,11 @@ jobs:
 
           tar -zxf example-directories/github-docs-sample.tgz
           npm run analyze -- github-docs-sample/
+
+      - name: Debug what was built
+        run: |
           ls -ltr out
+          cat out/index.html
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.3
