@@ -41,12 +41,12 @@ jobs:
 
           set -ex
 
-          tar -zxvf example-directories/github-docs-sample.tgz -C example-directories/github-docs-sample
+          tar -zxvf example-directories/github-docs-sample.tgz
           echo "What's hree?"
           ls -l
           echo "What's in example-directorie"
           ls example-directories
-          npm run analyze -- example-directories/github-docs-sample/
+          npm run analyze -- github-docs-sample/
           ls -ltr out
 
       # - name: Deploy 🚀
