@@ -47,7 +47,7 @@ export function DownloadFoundRecords({ records }: { records: Records }) {
     <Group style={{ marginTop: 50 }}>
       <Button
         type="button"
-        className="button button-inline-small"
+        variant="outline"
         title="Click to start downloading as a .json file"
         onClick={() => {
           triggerJSONDownload();
@@ -58,6 +58,7 @@ export function DownloadFoundRecords({ records }: { records: Records }) {
 
       <Button
         type="button"
+        variant="outline"
         title="Click to start downloading as a .csv file"
         onClick={() => {
           triggerCSVDownload();
