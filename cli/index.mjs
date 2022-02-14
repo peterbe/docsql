@@ -89,8 +89,10 @@ async function main(opts, sources) {
   const hashCurry = (lastBit) => `v${VERSION}.${pluginsHash}.${lastBit}`;
   const allDocs = [];
 
+  const allSources = [];
   for (const source of sources) {
     const files = findFiles(source);
+    allSources.push({ source, files: files.length });
     console.log(`${files.length.toLocaleString()} files found in ${source}.`);
 
     const progressBar = new cliProgress.SingleBar(
@@ -116,7 +118,7 @@ async function main(opts, sources) {
   const meta = {
     took: t1.getTime() - t0.getTime(),
     rows: allDocs.length,
-    sources,
+    sources: allSources,
   };
   // const ret: PagesAndMeta = {
   const combined = {
