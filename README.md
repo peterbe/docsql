@@ -102,6 +102,20 @@ directory and share with your team. Or, you can simply create a
 - Debugging bad plugins is a bit rough but an error thrown is stopping
   the CLI and the stacktrace should be sufficiently clear.
 
+## Open found files in your editor
+
+If you have an environment variable called `EDITOR` set, and you make a
+query that includes the key `_file` it will make that a clickable link,
+which when running on `localhost` will open that file on your computer.
+
+A lot of systems have a default `$EDITOR` which might be something
+terminal based, like `nano`. If you, for example, what your files to
+open in VS Code you can set:
+
+```sh
+echo EDITOR=code >> .env
+```
+
 ## Icon
 
 Icon by [Yannick Lung](https://www.iconfinder.com/icons/315196/documents_icon)

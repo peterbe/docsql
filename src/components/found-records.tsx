@@ -6,6 +6,21 @@ import useSWR from "swr";
 import { DownloadFoundRecords } from "./download-found-records";
 
 export function ShowFoundRecords({ records }: { records: Records }) {
+  // Event if $EDITOR is set current server, it might not be
+  // an actual local server. Opening a file in your local
+  // editor only makes sense when the server is running on your laptop.
+  const [allowLocalLinks, setAllowLocalLinks] = useState(false);
+  useEffect(() => {
+    const { hostname } = document.location;
+    if (
+      hostname === "localhost" ||
+      hostname === "127.0.0.1" ||
+      hostname === "0.0.0.0"
+    ) {
+      setAllowLocalLinks(true);
+    }
+  }, []);
+
   const [opening, setOpening] = useState<null | string>(null);
   useEffect(() => {
     const timeout = opening
@@ -100,19 +115,14 @@ export function ShowFoundRecords({ records }: { records: Records }) {
                   const value = record[key];
                   return (
                     <td key={key}>
-                      {key === "_file" ? (
-                        <a
-                          href={`#${value}`}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setOpening(value);
-                          }}
-                        >
-                          <FilePath value={value} />
-                        </a>
-                      ) : (
-                        formatValue(value)
-                      )}
+                      <ShowValue
+                        key_={key}
+                        value={value}
+                        allowLocalLinks={allowLocalLinks}
+                        setOpening={(value: string) => {
+                          setOpening(value);
+                        }}
+                      />
                     </td>
                   );
                 })}
@@ -132,6 +142,38 @@ export function ShowFoundRecords({ records }: { records: Records }) {
       )}
     </div>
   );
+}
+
+export function ShowValue({
+  key_,
+  value,
+  allowLocalLinks,
+  setOpening,
+}: {
+  key_: string;
+  value: any;
+  allowLocalLinks: boolean;
+  setOpening: (value: string) => void;
+}) {
+  if (key_ === "_file") {
+    if (allowLocalLinks) {
+      return (
+        <a
+          href={`#${value}`}
+          onClick={(e) => {
+            e.preventDefault();
+            setOpening(value);
+          }}
+        >
+          <FilePath value={value} />
+        </a>
+      );
+    } else {
+      return <FilePath value={value} />;
+    }
+  }
+
+  return <>{formatValue(value)}</>;
 }
 
 function FilePath({
