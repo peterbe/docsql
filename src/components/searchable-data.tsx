@@ -53,6 +53,23 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
     }
   }, [query, pages]);
 
+  const [possiblePrettySQL, setPossiblePrettySQL] = useState("");
+  useEffect(() => {
+    if (query) {
+      try {
+        const ast = alasql.parse(query);
+        const pretty = ast.toString().replace("FROM $0 AS default", "FROM ?");
+        if (pretty !== query) {
+          setPossiblePrettySQL(pretty);
+        }
+      } catch {
+        // Deliberately do nothing because nothing good can come out
+        // of prettying a broken query.
+        setPossiblePrettySQL("");
+      }
+    }
+  }, [query]);
+
   useEffect(() => {
     const [asPathRoot, asPathQuery = ""] = router.asPath.split("?");
     const params = new URLSearchParams(asPathQuery);
@@ -158,6 +175,7 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
       <CodeInputAndToolbar
         query={query}
         setQuery={setQuery}
+        prettyQuery={possiblePrettySQL}
         queryError={queryError}
         pages={data.pages}
         savedQueries={savedQueries}
@@ -191,6 +209,7 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
 function CodeInputAndToolbar({
   query,
   setQuery,
+  prettyQuery,
   queryError,
   pages,
   savedQueries,
@@ -201,6 +220,7 @@ function CodeInputAndToolbar({
 }: {
   query: string;
   setQuery: (x: string) => void;
+  prettyQuery: string;
   queryError: Error | null;
   pages: Page[];
   savedQueries: SavedQuery[];
@@ -216,6 +236,7 @@ function CodeInputAndToolbar({
       <CodeInput
         query={query}
         typedQuery={typedQuery}
+        prettyQuery={prettyQuery}
         setTypedQuery={setTypedQuery}
         onChange={(value: string) => {
           setQuery(value.trim());

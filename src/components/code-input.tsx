@@ -9,6 +9,7 @@ import { SavedQuery, ToolbarMenuOption } from "../types";
 export function CodeInput({
   onChange,
   query,
+  prettyQuery,
   typedQuery,
   setTypedQuery,
   hasError,
@@ -18,6 +19,7 @@ export function CodeInput({
 }: {
   onChange: (query: string) => void;
   query: string;
+  prettyQuery: string;
   typedQuery: string;
   setTypedQuery: (query: string) => void;
   hasError: boolean;
@@ -84,6 +86,17 @@ export function CodeInput({
             }
           >
             Run
+          </Button>{" "}
+          <Button
+            type="button"
+            variant="outline"
+            disabled={!prettyQuery || prettyQuery === typedQuery}
+            onClick={() => {
+              setTypedQuery(prettyQuery);
+              onChange(prettyQuery);
+            }}
+          >
+            Pretty format
           </Button>
         </Grid.Col>
         <Grid.Col span={6}>
