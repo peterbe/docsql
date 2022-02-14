@@ -18165,10 +18165,13 @@
     }
   ],
   "meta": {
-    "took": 274,
+    "took": 354,
     "rows": 688,
     "sources": [
-      "github-docs-sample/"
+      {
+        "source": "github-docs-sample/",
+        "files": 688
+      }
     ]
   }
 }
