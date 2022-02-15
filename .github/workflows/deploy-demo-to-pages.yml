@@ -7,7 +7,7 @@ on:
       - main
 
 env:
-  GH_PAGES_PREFIX: '/docsql'
+  GH_PAGES_PREFIX: "/docsql"
 
 jobs:
   build-and-deploy:
