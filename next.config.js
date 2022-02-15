@@ -1,15 +1,18 @@
 /** @type {import('next').NextConfig} */
 
+let assetPrefix = "";
+let trailingSlash = false;
 if (process.env.GH_PAGES_PREFIX) {
-  console.warn("Building for gh-pages so different asset prefix");
+  console.warn("Building for GitHub Pages specifically");
+  assetPrefix = process.env.GH_PAGES_PREFIX + "/";
+  trailingSlash = true;
 }
 
 const nextConfig = {
   reactStrictMode: true,
 
-  assetPrefix: process.env.GH_PAGES_PREFIX
-    ? process.env.GH_PAGES_PREFIX + "/"
-    : "",
+  trailingSlash,
+  assetPrefix,
 };
 
 module.exports = nextConfig;
