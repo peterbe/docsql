@@ -2,6 +2,13 @@
 
 Getting an overview of your Jamstack Markdown files.
 
+## Demo
+
+Play with: [https://peterbe.github.io/docsql/](https://peterbe.github.io/docsql/)
+
+You're supposed to run `docsQL` with your own projects Markdown files, but this
+demo uses a subset of the content behind [GitHub Docs](https://github.com/github/docs).
+
 ## How it works
 
 You give the CLI program one or more directories that contain Markdown files.
