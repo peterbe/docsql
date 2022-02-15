@@ -7,9 +7,18 @@ import { SearchableData } from "./searchable-data";
 import { Footer } from "./footer";
 import styles from "../styles/home.module.css";
 
+let API_URL = "/docs.json";
+if (process.env.NODE_ENV === "development") {
+  API_URL = "/api/docsproxy";
+} else if (process.env.GH_PAGES_PREFIX) {
+  console.warn("Building for gh-pages so different asset prefix");
+  // WHen building for GitHub Pages, every static asset sets a
+  API_URL = `${process.env.GH_PAGES_PREFIX}${API_URL}`;
+}
+
 export const Home: NextPage = () => {
   const { data, error } = useSWR<PagesAndMeta, Error>(
-    process.env.NODE_ENV === "development" ? "/api/docsproxy" : "/docs.json",
+    API_URL,
     async (url) => {
       const res = await fetch(url);
       if (res.ok) {
