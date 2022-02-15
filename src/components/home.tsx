@@ -6,6 +6,7 @@ import type { PagesAndMeta } from "../types";
 import { SearchableData } from "./searchable-data";
 import { Footer } from "./footer";
 import { DemoAlert } from "./demo-alert";
+import { ThemeSwitcher } from "./theme-switcher";
 import styles from "../styles/home.module.css";
 
 const API_URL =
@@ -35,6 +36,8 @@ export const Home: NextPage = () => {
       <DemoAlert />
       <div className={styles.container}>
         <h1 className={styles.heading}>docsQL</h1>
+        <ThemeSwitcher />
+
         <main className={styles.main}>
           {error && (
             <Alert color="red" title="Loading error">

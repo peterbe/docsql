@@ -45,12 +45,6 @@ export function ShowSavedQueries({
               </Button>
               <Button
                 title="Don't let it drop off"
-                // icon={
-                //   <Star
-                //     filled={star}
-                //     primaryColor={star ? "yellow" : "white"}
-                //   />
-                // }
                 onClick={() => {
                   starQuery(savedQuery.query);
                 }}
