@@ -45,6 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             fontFamilyMonospace:
               "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
           }}
+          withGlobalStyles
         >
           <Component {...pageProps} />
         </MantineProvider>
