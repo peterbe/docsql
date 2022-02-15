@@ -23,9 +23,9 @@ export function DemoAlert() {
           setShow(false);
         }}
       >
-        With <b>docsQL</b>, you're supposed to run it with your own projects
-        Markdown files. What you're seeing here is just a sample instance that
-        uses a sample of content from the{" "}
+        With <b>docsQL</b>, you&apos;re supposed to run it with your own
+        projects Markdown files. What you&apos;re seeing here is just a sample
+        instance that uses a sample of content from the{" "}
         <a
           href="https://github.com/github/docs"
           target="_blank"
