@@ -84,20 +84,24 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
     }
   }, [query]);
 
+  const asPath = router.asPath;
   useEffect(() => {
-    const [asPathRoot, asPathQuery = ""] = router.asPath.split("?");
+    const [asPathRoot, asPathQuery = ""] = asPath.split("?");
     const params = new URLSearchParams(asPathQuery);
     if (query) {
       params.set("query", query);
     } else {
       params.delete("query");
     }
-    let asPath = asPathRoot;
+    let asPathNew = asPathRoot;
     if (params.toString()) {
-      asPath += `?${params.toString()}`;
+      asPathNew += `?${params.toString()}`;
     }
-    routerReplace(asPath);
-  }, [query, router.asPath, routerReplace]);
+
+    if (asPathNew !== asPath) {
+      routerReplace(asPathNew);
+    }
+  }, [query, asPath, routerReplace]);
 
   const [savedQueries, setSavedQueries] = useState<SavedQuery[]>([]);
 
