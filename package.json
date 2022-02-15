@@ -9,12 +9,15 @@
     "build": "next build",
     "clear": "rm -rf .next out",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint && npm run prettier-check",
+    "prettier-check": "prettier -c \"**/*.{ts,tsx,js,mjs,scss,yml,yaml}\"",
+    "prettier-writer": "prettier -w \"**/*.{ts,tsx,js,mjs,scss,yml,yaml}\"",
     "export": "next export",
     "build:export": "npm run build && npm run export",
     "run": "node cli/index.mjs",
     "build:export:run": "npm run build:export && npm run run",
-    "test": "echo 'Tested in Actions'"
+    "test": "echo 'Tested in Actions'",
+    "prepare": "husky install"
   },
   "bin": "cli/index.mjs",
   "files": [
@@ -44,6 +47,7 @@
     "alasql": "1.7.3",
     "eslint": "8.9.0",
     "eslint-config-next": "12.0.10",
+    "husky": "7.0.4",
     "next": "12.0.10",
     "np": "7.6.0",
     "prettier": "2.5.1",
