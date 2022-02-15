@@ -22,6 +22,18 @@ function firstString(thing: string[] | string) {
   return thing;
 }
 
+function fixDoubleAliases(sql: string): string {
+  // Necessary because of https://github.com/agershun/alasql/issues/1426
+  const dupes = new Set<string>();
+  for (const match of sql.match(/\sAS \w+/g) || []) {
+    if (dupes.has(match)) {
+      sql = sql.replace(match, "");
+    }
+    dupes.add(match);
+  }
+  return sql;
+}
+
 const DEFAULT_QUERY =
   "SELECT title, length(title) AS length FROM ? ORDER BY 2 DESC LIMIT 10";
 
@@ -58,7 +70,9 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
     if (query) {
       try {
         const ast = alasql.parse(query);
-        const pretty = ast.toString().replace("FROM $0 AS default", "FROM ?");
+        const pretty = fixDoubleAliases(
+          ast.toString().replace("FROM $0 AS default", "FROM ?")
+        );
         if (pretty !== query) {
           setPossiblePrettySQL(pretty);
         }
