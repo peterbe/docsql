@@ -155,6 +155,13 @@ export function ShowValue({
   allowLocalLinks: boolean;
   setOpening: (value: string) => void;
 }) {
+  if (key_.endsWith("_url") && typeof value === "string") {
+    return (
+      <a href={value} target="_blank" rel="noreferrer">
+        {value}
+      </a>
+    );
+  }
   if (key_ === "_file") {
     if (allowLocalLinks) {
       return (

@@ -90,6 +90,37 @@ you can now run:
 SELECT _file, chocolateIcecreamMentions FROM ? WHERE chocolateIcecreamMentions > 0
 ```
 
+Instead of passing `--plugins my-plugins --plugins /my/other/custom-plugins`
+you can equally set the environment variable:
+
+```sh
+# Example of setting plugins directories
+DOCSQL_PLUGINS="myplugins, /my/other/custom-plugins"
+```
+
+### Important custom plugin key ending in `_url`
+
+Here's an example plugin that speaks for itself:
+
+```js
+// In /path/to/my/custom/plugins
+
+export default function getURL({ _file }) {
+  const pathname = _file.replace(/\.md$/, '')
+  return {
+    _url: `https://example.com/${pathname}`,
+    local_url: `https://localhost:4000/${pathname}`,
+  }
+}
+```
+
+Because the keys end with `_url` these are treated as external
+hyperlinks in the UI when queried. For example:
+
+```sql
+SELECT _url, local_url FROM ? ORDER BY RANDOM() LIMIT 10
+```
+
 ### Share plugins with your team
 
 At the moment, the best way is that one of you writes some plugins that
