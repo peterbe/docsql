@@ -41,6 +41,7 @@ program
   .description("Analyze all the Markdown files with SQL")
   .option("-v, --verbose", "Verbose outputs")
   .option("--analyze-only", "Generate the out.json without starting a server")
+  .option("--plugin [files...]", "Filepath to .mjs plugin files")
   .option("--plugins [directories...]", "Directory with your own .mjs plugins")
   .arguments("[directories...]", "Specific directories to analyze")
   .parse(process.argv);
@@ -88,6 +89,14 @@ async function main(opts, sources) {
   // const { plugins, pluginsHash } = await getAllPlugins(["plugins"]);
 
   const pluginFiles = getAllPluginFiles(pluginsDirectories);
+
+  for (const pluginFile of opts.plugin || []) {
+    if (!pluginFile.endsWith(".mjs")) {
+      throw new Error("own plugin must end with .mjs");
+    }
+    pluginFiles.push(path.resolve(pluginFile));
+  }
+
   const pluginsHash = getHashFiles(pluginFiles);
   console.log(`${pluginFiles.length.toLocaleString()} plugins found.`);
 
