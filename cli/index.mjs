@@ -70,11 +70,18 @@ async function main(opts, sources) {
     }
   }
 
-  // const hashCurry = (lastBit: string) => `v${VERSION}.${pluginsHash}.${lastBit}`;
-
   const pluginsDirectories = [path.join(__dirname, "..", "builtin-plugins")];
-  if (opts.plugins) {
-    pluginsDirectories.push(...opts.plugins);
+
+  let customPluginsDirectories = opts.plugins;
+  if (process.env.DOCSQL_PLUGINS && !customPluginsDirectories) {
+    customPluginsDirectories = process.env.DOCSQL_PLUGINS.split(",")
+      .map((x) => x.trim())
+      .filter(Boolean);
+  }
+
+  // const hashCurry = (lastBit: string) => `v${VERSION}.${pluginsHash}.${lastBit}`;
+  if (customPluginsDirectories) {
+    pluginsDirectories.push(...customPluginsDirectories);
   }
 
   const t0 = new Date();
