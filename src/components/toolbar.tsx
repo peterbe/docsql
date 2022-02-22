@@ -13,6 +13,7 @@ export function Toolbar({
   loadQuery,
   deleteSavedQuery,
   starQuery,
+  deleteAllSavedQueries,
 }: {
   currentMenu: ToolbarMenuOption;
   toggleMenu: (menu: ToolbarMenuOption) => void;
@@ -21,6 +22,7 @@ export function Toolbar({
   loadQuery: (query: string) => void;
   deleteSavedQuery: (query: string) => void;
   starQuery: (query: string) => void;
+  deleteAllSavedQueries: (includingStarred?: boolean) => void;
 }) {
   return (
     <Box>
@@ -36,6 +38,7 @@ export function Toolbar({
             deleteSavedQuery(query);
           }}
           starQuery={starQuery}
+          deleteAllSavedQueries={deleteAllSavedQueries}
         />
       )}
       {currentMenu === "examples" && (
