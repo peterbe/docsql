@@ -147,7 +147,11 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
   }, [savedQueries]);
 
   useEffect(() => {
-    if (foundRecords && !queryError) {
+    if (queryError) {
+      setSavedQueries((prevState) => {
+        return prevState.filter((entry) => entry.query != query);
+      });
+    } else if (foundRecords) {
       setSavedQueries((prevState) => {
         if (
           prevState.length > 0 &&
@@ -156,7 +160,6 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
         ) {
           return prevState;
         }
-
         const keepQueries: SavedQuery[] = [];
         // Can't just .slice() we because we want to make sure we don't delete
         // those that are starred

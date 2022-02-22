@@ -16,7 +16,7 @@ body {
 }
 
 textarea {
-  /* font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important; */
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
 }
 /* code {
   background-color: #f5f2f0;
