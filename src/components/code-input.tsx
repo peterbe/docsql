@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from "react";
-import { Button, Grid, Text } from "@mantine/core";
+import { Textarea, Button, Grid, Text } from "@mantine/core";
 import { Kbd } from "@mantine/core";
 import styles from "../styles/code-input.module.css";
 
@@ -58,11 +58,14 @@ export function CodeInput({
         <b>Tip!</b> Use <Kbd>⌘</Kbd>-<Kbd>Enter</Kbd> to run the query when
         focus is inside textarea
       </Text>
-      <textarea
+      <Textarea
         className={styles.textarea}
         spellCheck="false"
         autoFocus
+        error={hasError ? "Query has error" : undefined}
+        required
         rows={Math.min(100, Math.max(4, typedQuery.split("\n").length))}
+        size="md"
         ref={textareaRef}
         value={typedQuery}
         onChange={(event) => {
@@ -70,7 +73,7 @@ export function CodeInput({
         }}
       >
         {query}
-      </textarea>
+      </Textarea>
 
       <Grid>
         <Grid.Col span={6}>
