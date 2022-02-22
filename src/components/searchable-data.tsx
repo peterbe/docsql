@@ -218,6 +218,13 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
         }}
         currentMenu={currentMenu}
         toggleMenu={toggleMenu}
+        deleteAllSavedQueries={(includeStarred = false) => {
+          setSavedQueries((prevState) =>
+            prevState.filter((entry) => {
+              return !includeStarred && entry.star;
+            })
+          );
+        }}
       />
       {foundRecords !== null && currentMenu === "" && (
         <ShowFoundRecords records={foundRecords} />
@@ -238,6 +245,7 @@ function CodeInputAndToolbar({
   starQuery,
   currentMenu,
   toggleMenu,
+  deleteAllSavedQueries,
 }: {
   query: string;
   setQuery: (x: string) => void;
@@ -249,6 +257,7 @@ function CodeInputAndToolbar({
   starQuery: (query: string) => void;
   currentMenu: ToolbarMenuOption;
   toggleMenu: (menu: ToolbarMenuOption) => void;
+  deleteAllSavedQueries: (includingStarred?: boolean) => void;
 }) {
   const [typedQuery, setTypedQuery] = useState(query);
 
@@ -285,6 +294,7 @@ function CodeInputAndToolbar({
           }
         }}
         starQuery={starQuery}
+        deleteAllSavedQueries={deleteAllSavedQueries}
       />
     </div>
   );
