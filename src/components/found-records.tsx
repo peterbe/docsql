@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { Table } from "@mantine/core";
 import type { Records, OpenFile } from "../types";
 import styles from "../styles/found-records.module.css";
 import useSWR from "swr";
@@ -91,7 +91,7 @@ export function ShowFoundRecords({ records }: { records: Records }) {
           ? `(only showing first ${MAX_ROWS.toLocaleString()})`
           : null}
       </p>
-      <table>
+      <Table className={styles.found_records}>
         <thead>
           <tr>
             <th>&nbsp;</th>
@@ -130,7 +130,7 @@ export function ShowFoundRecords({ records }: { records: Records }) {
             );
           })}
         </tbody>
-      </table>
+      </Table>
       {records.length > 0 && <DownloadFoundRecords records={records} />}
 
       {records.length > MAX_ROWS && (

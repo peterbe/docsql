@@ -1,0 +1,32 @@
+.wrapper {
+  position: relative;
+}
+
+.completion {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  /* background-color: bisque; */
+  z-index: 100;
+  opacity: 0.96;
+}
+
+ul.options {
+  padding-left: 0px;
+  min-width: 200px;
+  margin: 0;
+}
+
+ul.options li {
+  list-style: none;
+  padding: 4px;
+}
+
+ul.options li:hover {
+  background-color: #efefef;
+  border-radius: 5px;
+}
+
+.highlighted_option {
+  background-color: #d3d3d3;
+}

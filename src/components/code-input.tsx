@@ -1,10 +1,35 @@
-import { useCallback, useEffect, useRef } from "react";
-import { Textarea, Button, Grid, Text } from "@mantine/core";
+import { useContext, useCallback } from "react";
+import { Button, Grid, Text } from "@mantine/core";
 import { Kbd } from "@mantine/core";
+
 import styles from "../styles/code-input.module.css";
 
+import { TextareaWithCompletion } from "./textarea-with-completion";
 import { ToolbarMenu } from "./toolbar-menu";
 import { SavedQuery, ToolbarMenuOption } from "../types";
+import { PossibleKeysContext } from "../contexts/possible-keys";
+
+const SQL_WORDS = new Map(
+  [
+    "SELECT",
+    "FROM",
+    "ORDER",
+    "BY",
+    "ASC",
+    "DESC",
+    "LENGTH",
+    "GROUP",
+    "LIMIT",
+    "OFFSET",
+    "WHERE",
+    "LIKE",
+    "ILIKE",
+    "AND",
+    "OR",
+    "NOT",
+    "RANDOM()",
+  ].map((x) => [x.toLowerCase(), x])
+);
 
 export function CodeInput({
   onChange,
@@ -31,21 +56,7 @@ export function CodeInput({
     onChange(typedQuery.trim());
   }, [typedQuery]);
 
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
-  const textareaElement = textareaRef.current;
-  useEffect(() => {
-    const listener = (event: KeyboardEvent) => {
-      if (event.key === "Enter" && event.metaKey) {
-        formSubmit();
-      }
-    };
-    if (textareaElement) textareaElement.addEventListener("keydown", listener);
-
-    return () => {
-      if (textareaElement)
-        textareaElement.removeEventListener("keydown", listener);
-    };
-  }, [textareaElement, formSubmit]);
+  const possibleKeys = useContext(PossibleKeysContext);
 
   return (
     <form
@@ -58,7 +69,7 @@ export function CodeInput({
         <b>Tip!</b> Use <Kbd>⌘</Kbd>-<Kbd>Enter</Kbd> to run the query when
         focus is inside textarea
       </Text>
-      <Textarea
+      <TextareaWithCompletion
         className={styles.textarea}
         spellCheck="false"
         autoFocus
@@ -66,14 +77,32 @@ export function CodeInput({
         required
         rows={Math.min(100, Math.max(4, typedQuery.split("\n").length))}
         size="md"
-        ref={textareaRef}
         value={typedQuery}
-        onChange={(event) => {
-          setTypedQuery(event.target.value);
+        onNewValue={(newValue: string) => {
+          setTypedQuery(newValue);
         }}
-      >
-        {query}
-      </Textarea>
+        onSubmit={() => {
+          formSubmit();
+        }}
+        completionCallback={(prefix: string) => {
+          const suggestions: string[] = [];
+          const prefixLower = prefix.toLowerCase();
+          for (const [lower, full] of Array.from(SQL_WORDS)) {
+            if (lower.startsWith(prefixLower) && prefix.length < lower.length) {
+              suggestions.push(full);
+            }
+          }
+          for (const name of Array.from(possibleKeys.keys())) {
+            if (
+              name.toLowerCase().startsWith(prefixLower) &&
+              prefix.length < name.length
+            ) {
+              suggestions.push(name);
+            }
+          }
+          return suggestions;
+        }}
+      />
 
       <Grid>
         <Grid.Col span={6}>
