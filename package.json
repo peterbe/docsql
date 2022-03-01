@@ -56,7 +56,7 @@
     "react-iconly": "2.2.5",
     "react-refractor": "2.1.5",
     "swr": "1.2.2",
-    "typescript": "4.5.5"
+    "typescript": "4.6.2"
   },
   "repository": {
     "type": "git",
