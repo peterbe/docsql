@@ -28,7 +28,7 @@ const SQL_WORDS = new Map(
     "OR",
     "NOT",
     "RANDOM()",
-  ].map((x) => [x.toLowerCase(), x])
+  ].map((x) => [x.toLowerCase(), `${x} `])
 );
 
 export function CodeInput({

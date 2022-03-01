@@ -22,10 +22,10 @@ ul.options li {
   padding: 4px;
 }
 
-ul.options li:hover {
+/* ul.options li:hover {
   background-color: #efefef;
   border-radius: 5px;
-}
+} */
 
 .highlighted_option {
   background-color: #d3d3d3;

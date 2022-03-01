@@ -21,7 +21,7 @@ export function TextareaWithCompletion(props: Props) {
   const { onSubmit, completionCallback, onNewValue, value, ...wrappedProps } =
     props;
 
-  const [debounced] = useDebouncedValue(value, 200);
+  const [debounced] = useDebouncedValue(value, 50);
   const [options, setOptions] = useState<string[]>([]);
   const [sliced, setSliced] = useState<Slice | null>(null);
   const [caretPosition, setCaretPosition] = useState<CaretPosition | null>(
@@ -114,7 +114,7 @@ export function TextareaWithCompletion(props: Props) {
   useEffect(() => {
     if (textareaElement) {
       const newSlice = getCurrentSlice(textareaElement);
-      console.log({ debounced, newSlice });
+      // console.log({ debounced, newSlice });
 
       setSliced(newSlice);
       // if (sliced) {
@@ -124,18 +124,32 @@ export function TextareaWithCompletion(props: Props) {
     }
   }, [debounced, textareaElement]);
 
+  // useEffect(() => {
+  //   if (textareaElement && sliced && value) {
+  //     console.log("SET CURSOR?", sliced, value);
+  //   }
+  // }, [textareaElement, value, sliced]);
+
   function completeIt(option: string) {
     if (!sliced || !value || typeof value !== "string") return;
-    console.log(sliced);
 
-    let newValue = value.slice(0, sliced.start);
-    console.log({ left: newValue });
+    let newValue = value.slice(0, sliced.start + 1);
 
     newValue += option;
     newValue += value.slice(sliced.end);
     // console.log({ newValue });
     // onChange(newValue);
+    // console.log({ sliced, left: newValue });
     onNewValue(newValue);
+
+    // setTimeout(() => {
+    //   if (textareaElement) {
+    //     textareaElement.selectionEnd = sliced.end + sliced.slice.length;
+    //   }
+    // }, 100);
+    // if (textareaElement) {
+    //   textareaElement.selectionEnd = sliced.end + sliced.slice.length;
+    // }
   }
 
   return (
@@ -187,7 +201,7 @@ export function TextareaWithCompletion(props: Props) {
               );
             })}
           </ul>
-          <small>{JSON.stringify(highlightPosition)}</small>
+          {/* <small>{JSON.stringify(highlightPosition)}</small> */}
         </Paper>
       )}
     </div>
@@ -202,7 +216,7 @@ function getCurrentSlice(target: HTMLTextAreaElement): Slice | null {
   let start = selectionEnd - 1;
   let end = selectionEnd;
 
-  console.log("start:", start, "end:", end);
+  // console.log("start:", start, "end:", end);
 
   while (value.charAt(start) && start > 0 && !/\s/.test(value.charAt(start))) {
     start--;
