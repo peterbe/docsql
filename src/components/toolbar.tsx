@@ -1,6 +1,6 @@
 import { Box } from "@mantine/core";
 
-import type { Page, SavedQuery, ToolbarMenuOption } from "../types";
+import type { SavedQuery, ToolbarMenuOption } from "../types";
 import { ShowHelp } from "./help";
 import { ShowSavedQueries } from "./saved-queries";
 import { ExampleQueries } from "./example-queries";
@@ -8,7 +8,6 @@ import { ExampleQueries } from "./example-queries";
 export function Toolbar({
   currentMenu,
   toggleMenu,
-  pages,
   savedQueries,
   loadQuery,
   deleteSavedQuery,
@@ -17,7 +16,6 @@ export function Toolbar({
 }: {
   currentMenu: ToolbarMenuOption;
   toggleMenu: (menu: ToolbarMenuOption) => void;
-  pages: Page[];
   savedQueries: SavedQuery[];
   loadQuery: (query: string) => void;
   deleteSavedQuery: (query: string) => void;
@@ -26,7 +24,7 @@ export function Toolbar({
 }) {
   return (
     <Box>
-      {currentMenu === "help" && <ShowHelp pages={pages} />}
+      {currentMenu === "help" && <ShowHelp />}
       {currentMenu === "saved" && (
         <ShowSavedQueries
           savedQueries={savedQueries}

@@ -25,9 +25,9 @@ textarea {
   border-radius: 3px;
 } */
 
-th {
+/* th {
   background-color: #efefef;
-}
+} */
 td, th {
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   font-size: .9em;

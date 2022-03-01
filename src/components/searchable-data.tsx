@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import alasql from "alasql";
 import { Alert } from "@mantine/core";
@@ -16,6 +16,10 @@ import { ShowFoundRecords } from "./found-records";
 import { AboutMetadata } from "./about-metadata";
 import useRouterReplace from "../hooks/use-router-replace";
 import { CodeInput } from "./code-input";
+import {
+  pagesToPossibleKeys,
+  PossibleKeysContext,
+} from "../contexts/possible-keys";
 
 function firstString(thing: string[] | string) {
   if (Array.isArray(thing)) return thing[0];
@@ -186,6 +190,8 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
     });
   }
 
+  const possibleKeys = pagesToPossibleKeys(data.pages);
+
   return (
     <div>
       {queryError && (
@@ -193,39 +199,40 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
           <code>{queryError.toString()}</code>
         </Alert>
       )}
-      <CodeInputAndToolbar
-        query={query}
-        setQuery={setQuery}
-        prettyQuery={possiblePrettySQL}
-        queryError={queryError}
-        pages={data.pages}
-        savedQueries={savedQueries}
-        deleteSavedQuery={(query: string) => {
-          setSavedQueries((prevState) => [
-            ...prevState.filter((p) => p.query !== query),
-          ]);
-        }}
-        starQuery={(query: string) => {
-          setSavedQueries((prevState) => [
-            ...prevState.map((p) => {
-              if (p.query === query) {
-                return Object.assign({}, p, { star: !Boolean(p.star) });
-              } else {
-                return Object.assign({}, p);
-              }
-            }),
-          ]);
-        }}
-        currentMenu={currentMenu}
-        toggleMenu={toggleMenu}
-        deleteAllSavedQueries={(includeStarred = false) => {
-          setSavedQueries((prevState) =>
-            prevState.filter((entry) => {
-              return !includeStarred && entry.star;
-            })
-          );
-        }}
-      />
+      <PossibleKeysContext.Provider value={possibleKeys}>
+        <CodeInputAndToolbar
+          query={query}
+          setQuery={setQuery}
+          prettyQuery={possiblePrettySQL}
+          queryError={queryError}
+          savedQueries={savedQueries}
+          deleteSavedQuery={(query: string) => {
+            setSavedQueries((prevState) => [
+              ...prevState.filter((p) => p.query !== query),
+            ]);
+          }}
+          starQuery={(query: string) => {
+            setSavedQueries((prevState) => [
+              ...prevState.map((p) => {
+                if (p.query === query) {
+                  return Object.assign({}, p, { star: !Boolean(p.star) });
+                } else {
+                  return Object.assign({}, p);
+                }
+              }),
+            ]);
+          }}
+          currentMenu={currentMenu}
+          toggleMenu={toggleMenu}
+          deleteAllSavedQueries={(includeStarred = false) => {
+            setSavedQueries((prevState) =>
+              prevState.filter((entry) => {
+                return !includeStarred && entry.star;
+              })
+            );
+          }}
+        />
+      </PossibleKeysContext.Provider>
       {foundRecords !== null && currentMenu === "" && (
         <ShowFoundRecords records={foundRecords} />
       )}
@@ -239,7 +246,6 @@ function CodeInputAndToolbar({
   setQuery,
   prettyQuery,
   queryError,
-  pages,
   savedQueries,
   deleteSavedQuery,
   starQuery,
@@ -251,7 +257,6 @@ function CodeInputAndToolbar({
   setQuery: (x: string) => void;
   prettyQuery: string;
   queryError: Error | null;
-  pages: Page[];
   savedQueries: SavedQuery[];
   deleteSavedQuery: (query: string) => void;
   starQuery: (query: string) => void;
@@ -280,7 +285,6 @@ function CodeInputAndToolbar({
       <Toolbar
         currentMenu={currentMenu}
         toggleMenu={toggleMenu}
-        pages={pages}
         savedQueries={savedQueries}
         loadQuery={(query: string) => {
           setTypedQuery(query);
