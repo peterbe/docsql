@@ -1,46 +1,46 @@
-import { Paper, Title } from "@mantine/core";
-import { Container } from "@mantine/core";
+import { useContext } from "react";
+import { Container, Paper, Table, Title } from "@mantine/core";
 
-import type { Page } from "../types";
+import { PossibleKeysContext } from "../contexts/possible-keys";
 
-export function ShowHelp({ pages }: { pages: Page[] }) {
+export function ShowHelp() {
+  const possibleKeys = useContext(PossibleKeysContext);
+
   const allKeys: {
     name: string;
     type: string;
   }[] = [];
 
-  // Loop over all instead because the first one might not have all the keys
-  Object.entries(pages[0])
-    .filter(([key]) => !key.startsWith("_"))
-    .forEach(([name, value]) => {
-      let type: "number" | "string" | "array" | "json" | "unknown" = "unknown";
-      if (typeof value === "number") {
-        type = "number";
-      } else if (typeof value === "string") {
-        type = "string";
-      } else if (Array.isArray(value)) {
-        type = "array";
-      } else if (typeof value === "object") {
-        type = "json";
-      } else {
-        console.log(name, value);
-      }
-
-      allKeys.push({ name, type });
-    });
+  for (const [name, type] of Array.from(possibleKeys)) {
+    allKeys.push({ name, type });
+  }
+  allKeys.sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <div>
       <Container style={{ margin: 40 }}>
         <Paper padding="md" shadow="sm" withBorder>
           <Title order={4}>Possible keys</Title>
-          <ul>
-            {allKeys.map(({ name, type }) => (
-              <li key={name}>
-                <code>{name}</code> <small>({type})</small>
-              </li>
-            ))}
-          </ul>
+          <Table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                {/* <th>Sample value</th> */}
+              </tr>
+            </thead>
+            <tbody>
+              {allKeys.map(({ name, type }) => (
+                <tr key={name}>
+                  <td>
+                    <code>{name}</code>
+                  </td>
+                  <td>{type}</td>
+                  {/* <td>{type}</td> */}
+                </tr>
+              ))}
+            </tbody>
+          </Table>
         </Paper>
       </Container>
 
