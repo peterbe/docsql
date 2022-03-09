@@ -198,6 +198,8 @@ echo EDITOR=code >> .env
 *Automatically opened in VS Code (only when running on localhost)*
 ![Opened in VS Code](screenshots/opened-in-vscode.png)
 
+*Write your own plugins (to generate columns)*
+![Sample plugin code](screenshots/sample-plugin.png)
 
 ## Icon
 
