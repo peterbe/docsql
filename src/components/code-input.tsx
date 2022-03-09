@@ -71,6 +71,7 @@ export function CodeInput({
         onChange={(event) => {
           setTypedQuery(event.target.value);
         }}
+        autoCorrect="off"
       >
         {query}
       </Textarea>
