@@ -162,6 +162,43 @@ echo EDITOR=code >> .env
 *Saved queries*
 ![Saved queries](screenshots/saved-queries.png)
 
+*Open help*
+![Open help](screenshots/open-help.png)
+
+*Example queries help you learn*
+![Example queries](screenshots/example-queries.png)
+
+*Pre- pretty format*
+![Pre- pretty format](screenshots/pre-pretty-format.png)
+
+*Post- pretty format*
+![Post- pretty format](screenshots/post-pretty-format.png)
+
+*Less trivial query*
+![Less trivial query](screenshots/less-trivial-query.png)
+
+*URLs become clickable links*
+![URLs become clickable links](screenshots/urls.png)
+
+*Dark mode*
+![Dark mode](screenshots/dark-mode.png)
+
+*Export by downloading*
+![Download](screenshots/download.png)
+
+*Downloaded JSON file*
+![Downloaded JSON file](screenshots/downloaded-json.png)
+
+*Downloaded CSV file*
+![Downloaded CSV file](screenshots/downloaded-csv.png)
+
+*Click to open in your local editor (only when running on localhost)*
+![Click to open](screenshots/click-to-open.png)
+
+*Automatically opened in VS Code (only when running on localhost)*
+![Opened in VS Code](screenshots/opened-in-vscode.png)
+
+
 ## Icon
 
 Icon by [Yannick Lung](https://www.iconfinder.com/icons/315196/documents_icon)
