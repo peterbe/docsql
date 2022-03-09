@@ -154,6 +154,14 @@ open in VS Code you can set:
 echo EDITOR=code >> .env
 ```
 
+## Screenshots (as of Mar 2022)
+
+*Simple query*
+![Basic query](screenshots/simple-query.png)
+
+*Saved queries*
+![Saved queries](screenshots/saved-queries.png)
+
 ## Icon
 
 Icon by [Yannick Lung](https://www.iconfinder.com/icons/315196/documents_icon)
