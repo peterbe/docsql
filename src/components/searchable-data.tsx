@@ -7,7 +7,6 @@ import type {
   PagesAndMeta,
   SavedQuery,
   Records,
-  Page,
   ToolbarMenuOption,
 } from "../types";
 
@@ -44,7 +43,7 @@ const DEFAULT_QUERY =
 export function SearchableData({ data }: { data: PagesAndMeta }) {
   const router = useRouter();
 
-  const defaultQuery = firstString(router.query.query || DEFAULT_QUERY);
+  const defaultQuery = firstString(router.query.query || "");
 
   const [foundRecords, setFoundRecords] = useState<Records | null>(null);
   const [queryError, setQueryError] = useState<Error | null>(null);
@@ -128,6 +127,17 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
       }
     }
   }, []);
+
+  useEffect(() => {
+    if (!defaultQuery) {
+      if (savedQueries.length) {
+        // Use the most recently used one
+        setQuery(savedQueries[0].query);
+      } else {
+        setQuery(DEFAULT_QUERY);
+      }
+    }
+  }, [defaultQuery, savedQueries]);
 
   useEffect(() => {
     const storage =
@@ -264,7 +274,13 @@ function CodeInputAndToolbar({
   toggleMenu: (menu: ToolbarMenuOption) => void;
   deleteAllSavedQueries: (includingStarred?: boolean) => void;
 }) {
-  const [typedQuery, setTypedQuery] = useState(query);
+  const [typedQuery, setTypedQuery] = useState("");
+
+  useEffect(() => {
+    if (query) {
+      setTypedQuery(query);
+    }
+  }, [query]);
 
   return (
     <div>
