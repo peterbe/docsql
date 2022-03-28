@@ -109,7 +109,7 @@ export default function getURL({ _file }) {
   const pathname = _file.replace(/\.md$/, '')
   return {
     _url: `https://example.com/${pathname}`,
-    local_url: `https://localhost:4000/${pathname}`,
+    local_url: `http://localhost:4000/${pathname}`,
   }
 }
 ```
@@ -119,6 +119,19 @@ hyperlinks in the UI when queried. For example:
 
 ```sql
 SELECT _url, local_url FROM ? ORDER BY RANDOM() LIMIT 10
+```
+
+Suppose that your URLs depend on something from the front-matter of
+each document, here's an example:
+
+```js
+// In /path/to/my/custom/plugins
+
+export default function getURL({ data: {slug} }) {
+  return {
+    _url: `https://example.com/en/${slug}`,
+  }
+}
 ```
 
 ### Share plugins with your team
