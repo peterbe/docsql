@@ -1,21 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Alert } from "@mantine/core";
 
+const DEMO_ALERT_TITLE = process.env.NEXT_PUBLIC_DEMO_ALERT_TITLE;
+const DEMO_ALERT_BODY = process.env.NEXT_PUBLIC_DEMO_ALERT_BODY;
+
 export function DemoAlert() {
-  const [show, setShow] = useState(false);
-  useEffect(() => {
-    const { hostname } = document.location;
-    if (hostname === "peterbe.github.io") {
-      setShow(true);
-    }
-  }, []);
+  const [show, setShow] = useState(Boolean(DEMO_ALERT_TITLE));
+
+  const bodyHTML = DEMO_ALERT_BODY || "This is a demo implementation only.";
 
   if (show) {
     return (
       <Alert
         withCloseButton
         closeButtonLabel="Close alert"
-        title="This is just a demo!"
+        title={DEMO_ALERT_TITLE}
         color="pink"
         radius="lg"
         style={{ margin: 20 }}
@@ -23,17 +22,7 @@ export function DemoAlert() {
           setShow(false);
         }}
       >
-        With <b>docsQL</b>, you&apos;re supposed to run it with your own
-        projects Markdown files. What you&apos;re seeing here is just a sample
-        instance that uses a sample of content from the{" "}
-        <a
-          href="https://github.com/github/docs"
-          target="_blank"
-          rel="noreferrer"
-        >
-          GitHub Docs project
-        </a>
-        .
+        <div dangerouslySetInnerHTML={{ __html: bodyHTML }} />
       </Alert>
     );
   }

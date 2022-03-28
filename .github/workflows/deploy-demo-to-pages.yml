@@ -8,6 +8,8 @@ on:
 
 env:
   GH_PAGES_PREFIX: "/docsql"
+  NEXT_PUBLIC_DEMO_ALERT_TITLE: "This is just a demo!"
+  NEXT_PUBLIC_DEMO_ALERT_BODY: 'With <b>docsQL</b>, you&apos;re supposed to run it with your ownprojects Markdown files. What you&apos;re seeing here is just a sample instance that uses a sample of content from the <a href="https://github.com/github/docs" target="_blank" rel="noreferrer">GitHub Docs project</a>.'
 
 jobs:
   build-and-deploy:
