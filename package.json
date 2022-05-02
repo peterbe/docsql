@@ -28,7 +28,7 @@
   ],
   "dependencies": {
     "cli-progress": "3.11.0",
-    "commander": "9.1.0",
+    "commander": "9.2.0",
     "dotenv": "16.0.0",
     "fdir": "5.2.0",
     "gray-matter": "4.0.3",
