@@ -29,7 +29,7 @@
   "dependencies": {
     "cli-progress": "3.11.1",
     "commander": "9.3.0",
-    "dotenv": "16.0.0",
+    "dotenv": "16.0.1",
     "fdir": "5.2.0",
     "gray-matter": "4.0.3",
     "open-editor": "4.0.0",
