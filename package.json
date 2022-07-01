@@ -27,7 +27,7 @@
     "/builtin-plugins"
   ],
   "dependencies": {
-    "cli-progress": "3.11.1",
+    "cli-progress": "3.11.2",
     "commander": "9.3.0",
     "dotenv": "16.0.1",
     "fdir": "5.2.0",
