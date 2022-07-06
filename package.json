@@ -48,7 +48,7 @@
     "eslint": "8.19.0",
     "eslint-config-next": "12.2.0",
     "husky": "8.0.1",
-    "next": "12.1.6",
+    "next": "12.2.0",
     "np": "7.6.2",
     "prettier": "2.7.1",
     "react": "17.0.2",
