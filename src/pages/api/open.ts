@@ -9,9 +9,14 @@ import { CONTENT_SOURCES, EDITOR } from "../../lib/sources";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { OpenFile } from "../../types";
 
+type BadRequestError = {
+  editor: string;
+  error: string;
+};
+
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<OpenFile>
+  res: NextApiResponse<OpenFile | BadRequestError>
 ) {
   const filePath = Array.isArray(req.query.filePath)
     ? req.query.filePath[0]
@@ -20,7 +25,7 @@ export default async function handler(
   if (!filePath) {
     res
       .status(400)
-      .json({ filePath, editor: EDITOR, error: "No 'filePath' query string" });
+      .json({ editor: EDITOR, error: "No 'filePath' query string" });
     return;
   }
 
