@@ -1,11 +1,10 @@
-import Head from "next/head"; // import { useState } from "react";
+import Head from "next/head";
 import {
   MantineProvider,
   ColorSchemeProvider,
   ColorScheme,
 } from "@mantine/core";
-import { useColorScheme } from "@mantine/hooks";
-import { useLocalStorageValue } from "@mantine/hooks";
+import { useColorScheme, useLocalStorage } from "@mantine/hooks";
 
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
@@ -15,10 +14,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   // and always 'light' during ssr as window.matchMedia is not available
   const preferredColorScheme = useColorScheme();
 
-  const [colorScheme, setColorScheme] = useLocalStorageValue<ColorScheme>({
+  const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: "mantine-color-scheme",
-    defaultValue: preferredColorScheme,
+    defaultValue: "light",
+    getInitialValueInEffect: true,
   });
+
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
@@ -46,6 +47,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
           }}
           withGlobalStyles
+          withNormalizeCSS
         >
           <Component {...pageProps} />
         </MantineProvider>
