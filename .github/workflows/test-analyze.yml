@@ -8,10 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.0.2
 
       - name: Set up node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v3.4.1
         with:
           cache: npm
 
