@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Container, Paper, Table, Title } from "@mantine/core";
+import { Anchor, Container, Paper, Table, Title } from "@mantine/core";
 
 import { PossibleKeysContext } from "../contexts/possible-keys";
 
@@ -19,7 +19,7 @@ export function ShowHelp() {
   return (
     <div>
       <Container style={{ margin: 40 }}>
-        <Paper padding="md" shadow="sm" withBorder>
+        <Paper p="md" shadow="sm" withBorder>
           <Title order={4}>Possible keys</Title>
           <Table>
             <thead>
@@ -45,7 +45,7 @@ export function ShowHelp() {
       </Container>
 
       <Container style={{ margin: 40 }}>
-        <Paper padding="md" shadow="sm" withBorder>
+        <Paper p="md" shadow="sm" withBorder>
           <Title order={4}>SQL is case-insensitive, but keys aren&apos;t</Title>
           <p>
             <code>SELECT title FROM ? ORDER BY textLength LIMIT 10</code>
@@ -67,17 +67,17 @@ export function ShowHelp() {
       </Container>
 
       <Container style={{ margin: 40 }}>
-        <Paper padding="md" shadow="sm" withBorder>
+        <Paper p="md" shadow="sm" withBorder>
           <Title order={4}>Read the docs</Title>
           <p>
             The most important documentation is{" "}
-            <a
+            <Anchor
               href="https://github.com/agershun/alasql/wiki"
               target="_blank"
               rel="noreferrer"
             >
               AlaSQL
-            </a>{" "}
+            </Anchor>{" "}
             which is what the SQL engine is based on.
           </p>
           <p>

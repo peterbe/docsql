@@ -1,5 +1,6 @@
+import type { MouseEvent } from "react";
 import { useEffect, useState } from "react";
-import { Table } from "@mantine/core";
+import { Anchor, Table } from "@mantine/core";
 
 import type { Records, OpenFile } from "../types";
 import styles from "../styles/found-records.module.css";
@@ -110,7 +111,7 @@ export function ShowFoundRecords({ records }: { records: Records }) {
                 className={styles.row}
               >
                 <td className={styles.row_number}>
-                  <a href={`#l${i + 1}`}>{i + 1}</a>
+                  <Anchor href={`#l${i + 1}`}>{i + 1}</Anchor>
                 </td>
                 {keys.map((key) => {
                   const value = record[key];
@@ -158,23 +159,23 @@ export function ShowValue({
 }) {
   if (key_.endsWith("_url") && typeof value === "string") {
     return (
-      <a href={value} target="_blank" rel="noreferrer">
+      <Anchor href={value} target="_blank" rel="noreferrer">
         {value}
-      </a>
+      </Anchor>
     );
   }
   if (key_ === "_file") {
     if (allowLocalLinks) {
       return (
-        <a
+        <Anchor
           href={`#${value}`}
-          onClick={(e) => {
-            e.preventDefault();
+          onClick={(event: MouseEvent<HTMLAnchorElement>) => {
+            event.preventDefault();
             setOpening(value);
           }}
         >
           <FilePath value={value} />
-        </a>
+        </Anchor>
       );
     } else {
       return <FilePath value={value} />;
