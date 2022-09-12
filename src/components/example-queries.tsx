@@ -18,7 +18,7 @@ const EXAMPLES = [
     description: "Top 5 shortest titles",
   },
   {
-    sql: 'SELECT topics, topics->length AS count FROM ? WHERE "Accounts" IN topics',
+    sql: 'SELECT topics, topics->length AS length FROM ? WHERE "Accounts" IN topics',
     description:
       "Filter by presence inside an array and count entries in array",
   },
