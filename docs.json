@@ -18853,13 +18853,14 @@
     }
   ],
   "meta": {
-    "took": 298,
+    "took": 270,
     "rows": 688,
     "sources": [
       {
         "source": "github-docs-sample/",
         "files": 688
       }
-    ]
+    ],
+    "version": "0.8.0"
   }
 }
