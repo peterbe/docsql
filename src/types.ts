@@ -12,6 +12,7 @@ export interface Meta {
   took: number;
   rows: number;
   sources: Source[];
+  version: string;
 }
 export interface PagesAndMeta {
   pages: Page[];

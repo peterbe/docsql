@@ -4,7 +4,6 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-// import next from "next";
 import polka from "polka";
 import sirv from "sirv";
 import dotenv from "dotenv";
@@ -130,13 +129,12 @@ async function main(opts, sources) {
 
   const t1 = new Date();
 
-  // const meta: Meta = {
   const meta = {
     took: t1.getTime() - t0.getTime(),
     rows: allDocs.length,
     sources: allSources,
+    version: VERSION,
   };
-  // const ret: PagesAndMeta = {
   const combined = {
     pages: allDocs,
     meta,

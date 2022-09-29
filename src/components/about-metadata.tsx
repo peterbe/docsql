@@ -40,6 +40,11 @@ export function AboutMetadata({ meta }: { meta: Meta }) {
                   </li>
                 ))}
               </ul>
+              {meta.version && (
+                <p>
+                  <b>docsQL version</b> {meta.version}
+                </p>
+              )}
             </div>
           )}
         </>
