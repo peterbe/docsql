@@ -18,7 +18,8 @@
     "build:export:run": "npm run build:export && npm run run",
     "test": "echo 'Tested in Actions'",
     "prepare": "husky install",
-    "tsc": "tsc --noEmit"
+    "tsc": "tsc --noEmit",
+    "release": "npm run build:export && np"
   },
   "bin": "cli/index.mjs",
   "files": [

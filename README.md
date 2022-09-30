@@ -217,3 +217,11 @@ echo EDITOR=code >> .env
 ## Icon
 
 Icon by [Yannick Lung](https://www.iconfinder.com/icons/315196/documents_icon)
+
+## How to release
+
+Run:
+
+```sh
+npm run publish
+```
