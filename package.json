@@ -29,7 +29,7 @@
     "/builtin-plugins"
   ],
   "dependencies": {
-    "@emotion/react": "11.10.4",
+    "@emotion/react": "11.10.5",
     "@emotion/server": "11.10.0",
     "cli-progress": "3.11.2",
     "commander": "9.4.1",
