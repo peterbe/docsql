@@ -174,11 +174,11 @@ export function ShowValue({
             setOpening(value);
           }}
         >
-          <FilePath value={value} />
+          <FilePath value={value || ""} />
         </Anchor>
       );
     } else {
-      return <FilePath value={value} />;
+      return <FilePath value={value || ""} />;
     }
   }
 
