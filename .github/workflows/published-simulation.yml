@@ -55,7 +55,7 @@ jobs:
           npx . $GITHUB_WORKSPACE/example-directories > /tmp/stdout.log 2> /tmp/stderr.log &
 
       - name: Check that the server started
-        run: curl --retry-connrefused --retry 3 -I http://localhost:3000/
+        run: curl --retry-connrefused --retry 4 -I http://localhost:3000/
 
       - name: Debug any server outputs
         if: failure()
