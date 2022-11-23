@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-let assetPrefix = "";
+let assetPrefix = undefined;
 let trailingSlash = false;
 if (process.env.GH_PAGES_PREFIX) {
   console.warn("Building for GitHub Pages specifically");
