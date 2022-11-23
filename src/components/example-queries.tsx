@@ -27,6 +27,11 @@ const EXAMPLES = [
     description: "Case insensitive filter by wildcard operator on string",
   },
   {
+    sql: 'SELECT title FROM ? WHERE REGEXP_LIKE(title, "\\bactions?\\b", "i")',
+    description:
+      "Match whole word 'action' or 'actions' but not 'transaction' or 'actionable'",
+  },
+  {
     sql: "SELECT changelog, changelog->label FROM ? WHERE changelog AND changelog->label",
     description:
       "Select from JSON object and filter by those that have a truthy value on that key",
