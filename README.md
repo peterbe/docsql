@@ -223,5 +223,5 @@ Icon by [Yannick Lung](https://www.iconfinder.com/icons/315196/documents_icon)
 Run:
 
 ```sh
-npm run publish
+npm run release
 ```
