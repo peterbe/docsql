@@ -45,7 +45,7 @@
     "@mantine/hooks": "5.8.3",
     "@mantine/next": "5.8.3",
     "@modulz/radix-icons": "4.0.0",
-    "@types/node": "18.11.9",
+    "@types/node": "18.11.10",
     "@types/react": "18.0.9",
     "@types/refractor": "3.0.2",
     "alasql": "2.1.8",
