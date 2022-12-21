@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Button, Highlight, TextInput, Grid } from "@mantine/core";
+import { Button, Highlight, TextInput, Text, Title } from "@mantine/core";
+import { Search } from "react-iconly";
+
 import { SQL } from "../utils/syntax-highlighter";
 import styles from "../styles/example-queries.module.css";
 
@@ -78,28 +80,18 @@ export function ExampleQueries({
     return true;
   });
   return (
-    <div>
-      <Grid>
-        <Grid.Col span={6}>
-          <form>
-            <TextInput
-              type="search"
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-              // label="Search"
-              placeholder="Search..."
-            />
-          </form>
-        </Grid.Col>
-        <Grid.Col span={6}>
-          <p>
-            <small>
-              These are static examples they might not work with <i>your</i>{" "}
-              data.
-            </small>
-          </p>
-        </Grid.Col>
-      </Grid>
+    <div style={{ marginTop: 50 }}>
+      <Title order={4}>Saved queries</Title>
+
+      <form>
+        <TextInput
+          type="search"
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+          placeholder="Search filter..."
+          icon={<Search size={14} />}
+        />
+      </form>
 
       {examples.map(({ sql, description }, i) => {
         return (
@@ -124,6 +116,9 @@ export function ExampleQueries({
           <i>No examples found</i>
         </p>
       )}
+      <Text fz="sm">
+        These are static examples they might not work with <i>your</i> data.
+      </Text>
     </div>
   );
 }

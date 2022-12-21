@@ -36,6 +36,7 @@ export function ShowSavedQueries({
       {savedQueries.length > 1 && (
         <form>
           <TextInput
+            type="search"
             placeholder="Search filter..."
             value={searchFilter}
             onChange={(e) => setSearchFilter(e.target.value)}
