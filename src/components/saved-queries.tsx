@@ -1,5 +1,6 @@
-import { Title, Button, Group } from "@mantine/core";
-import { Star } from "react-iconly";
+import { useState } from "react";
+import { Title, Button, Group, TextInput, Text } from "@mantine/core";
+import { Star, Search } from "react-iconly";
 
 import { SQL } from "../utils/syntax-highlighter";
 import type { SavedQuery } from "../types";
@@ -19,11 +20,41 @@ export function ShowSavedQueries({
   starQuery: (s: string) => void;
   deleteAllSavedQueries: (includingStarred?: boolean) => void;
 }) {
+  const [searchFilter, setSearchFilter] = useState("");
+
+  const filteredSavedQueries = savedQueries.filter((savedQuery) => {
+    return (
+      !searchFilter.trim() ||
+      savedQuery.query.toLowerCase().includes(searchFilter.toLowerCase().trim())
+    );
+  });
+
   return (
     <div style={{ marginTop: 50 }}>
       <Title order={4}>Saved queries</Title>
 
-      {savedQueries.map((savedQuery) => {
+      {savedQueries.length > 1 && (
+        <form>
+          <TextInput
+            placeholder="Search filter..."
+            value={searchFilter}
+            onChange={(e) => setSearchFilter(e.target.value)}
+            icon={<Search size={14} />}
+          />
+          {searchFilter.trim() && (
+            <div>
+              <Text fz="sm">
+                Found {filteredSavedQueries.length}. Filtered out{" "}
+                {filteredSavedQueries.length > 0
+                  ? savedQueries.length - filteredSavedQueries.length
+                  : "everything"}
+              </Text>
+            </div>
+          )}
+        </form>
+      )}
+
+      {filteredSavedQueries.map((savedQuery) => {
         const star = Boolean(savedQuery.star);
         return (
           <div
