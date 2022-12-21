@@ -41,8 +41,8 @@
     "sirv": "2.0.2"
   },
   "devDependencies": {
-    "@mantine/core": "5.8.3",
-    "@mantine/hooks": "5.8.3",
+    "@mantine/core": "5.9.5",
+    "@mantine/hooks": "5.9.5",
     "@mantine/next": "5.9.5",
     "@modulz/radix-icons": "4.0.0",
     "@types/node": "18.11.17",
