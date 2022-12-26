@@ -50,7 +50,7 @@
     "@types/refractor": "3.0.2",
     "alasql": "2.2.5",
     "eslint": "8.30.0",
-    "eslint-config-next": "13.0.7",
+    "eslint-config-next": "13.1.1",
     "husky": "8.0.2",
     "next": "12.3.1",
     "np": "7.6.2",
