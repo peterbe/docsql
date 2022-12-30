@@ -1,5 +1,5 @@
 import { useMantineColorScheme, Button } from "@mantine/core";
-import { SunIcon, MoonIcon } from "@modulz/radix-icons";
+import { IconSun, IconMoonStars } from "@tabler/icons";
 
 export function ThemeSwitcher() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
@@ -7,7 +7,7 @@ export function ThemeSwitcher() {
   return (
     <Button
       variant="subtle"
-      leftIcon={dark ? <SunIcon /> : <MoonIcon />}
+      leftIcon={dark ? <IconSun /> : <IconMoonStars />}
       onClick={() => toggleColorScheme()}
       style={{
         position: "absolute",
