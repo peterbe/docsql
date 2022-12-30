@@ -1,22 +1,19 @@
-import { Switch, useMantineColorScheme } from "@mantine/core";
-// import { SunIcon, MoonIcon } from "@modulz/radix-icons";
+import { Anchor, Text } from "@mantine/core";
+
+import styles from "../styles/footer.module.css";
 
 export function Footer() {
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-  const dark = colorScheme === "dark";
-
-  return null;
   return (
-    <Switch
-      // color={dark ? "yellow" : "blue"}
-      onClick={() => toggleColorScheme()}
-      title="Toggle color scheme"
-    >
-      {dark
-        ? "Light"
-        : // <SunIcon style={{ width: 18, height: 18 }} />
-          // <MoonIcon style={{ width: 18, height: 18 }} />
-          "Dark"}
-    </Switch>
+    <footer className={styles.footer}>
+      <Text fz="sm">
+        <Anchor
+          href="https://github.com/peterbe/docsql"
+          target="_blank"
+          rel="noopener"
+        >
+          github.com/peterbe/docsql
+        </Anchor>
+      </Text>
+    </footer>
   );
 }

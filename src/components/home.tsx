@@ -53,9 +53,7 @@ export const Home: NextPage = () => {
           {data && <SearchableData data={data} />}
         </main>
 
-        <footer className={styles.footer}>
-          <Footer />
-        </footer>
+        <Footer />
       </div>
     </>
   );
