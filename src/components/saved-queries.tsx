@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Title, Button, Group, TextInput, Text } from "@mantine/core";
-import { Star, Search } from "react-iconly";
+import { IconSearch, IconStar } from "@tabler/icons";
 
 import { SQL } from "../utils/syntax-highlighter";
 import type { SavedQuery } from "../types";
@@ -40,7 +40,7 @@ export function ShowSavedQueries({
             placeholder="Search filter..."
             value={searchFilter}
             onChange={(e) => setSearchFilter(e.target.value)}
-            icon={<Search size={14} />}
+            icon={<IconSearch size={14} />}
           />
           {searchFilter.trim() && (
             <div>
@@ -83,7 +83,10 @@ export function ShowSavedQueries({
                   starQuery(savedQuery.query);
                 }}
               >
-                <Star filled={star} primaryColor={star ? "yellow" : "white"} />
+                <IconStar
+                  fill={star ? "yellow" : "transparent"}
+                  color={star ? "yellow" : "white"}
+                />
               </Button>
               <Button
                 type="button"

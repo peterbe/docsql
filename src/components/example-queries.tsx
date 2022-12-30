@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Highlight, TextInput, Text, Title } from "@mantine/core";
-import { Search } from "react-iconly";
+import { IconSearch } from "@tabler/icons";
 
 import { SQL } from "../utils/syntax-highlighter";
 import styles from "../styles/example-queries.module.css";
@@ -89,7 +89,7 @@ export function ExampleQueries({
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           placeholder="Search filter..."
-          icon={<Search size={14} />}
+          icon={<IconSearch size={14} />}
         />
       </form>
 
