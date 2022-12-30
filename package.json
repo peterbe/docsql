@@ -31,6 +31,7 @@
   "dependencies": {
     "@emotion/react": "11.10.5",
     "@emotion/server": "11.10.0",
+    "@tabler/icons": "1.119.0",
     "cli-progress": "3.11.2",
     "commander": "9.4.1",
     "dotenv": "16.0.3",
@@ -44,7 +45,6 @@
     "@mantine/core": "5.9.5",
     "@mantine/hooks": "5.9.5",
     "@mantine/next": "5.9.5",
-    "@modulz/radix-icons": "4.0.0",
     "@types/node": "18.11.18",
     "@types/react": "18.0.9",
     "@types/refractor": "3.0.2",
