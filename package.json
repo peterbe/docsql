@@ -44,7 +44,7 @@
   "devDependencies": {
     "@mantine/core": "5.9.5",
     "@mantine/hooks": "5.9.5",
-    "@mantine/next": "5.9.5",
+    "@mantine/next": "5.9.6",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
     "@types/refractor": "3.0.2",
