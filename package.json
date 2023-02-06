@@ -31,7 +31,7 @@
   "dependencies": {
     "@emotion/react": "11.10.5",
     "@emotion/server": "11.10.0",
-    "@tabler/icons": "1.119.0",
+    "@tabler/icons-react": "2.2.0",
     "cli-progress": "3.11.2",
     "commander": "10.0.0",
     "dotenv": "16.0.3",

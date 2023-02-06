@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Title, Button, Group, TextInput, Text } from "@mantine/core";
-import { IconSearch, IconStar } from "@tabler/icons";
+import { IconSearch, IconStar } from "@tabler/icons-react";
 
 import { SQL } from "../utils/syntax-highlighter";
 import type { SavedQuery } from "../types";
