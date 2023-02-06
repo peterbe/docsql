@@ -42,9 +42,9 @@
     "sirv": "2.0.2"
   },
   "devDependencies": {
-    "@mantine/core": "5.10.0",
-    "@mantine/hooks": "5.10.0",
-    "@mantine/next": "5.10.2",
+    "@mantine/core": "5.10.3",
+    "@mantine/hooks": "5.10.3",
+    "@mantine/next": "5.10.3",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
     "@types/refractor": "3.0.2",
