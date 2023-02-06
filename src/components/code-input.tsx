@@ -64,7 +64,7 @@ export function CodeInput({
         autoFocus
         error={hasError ? "Query has error" : undefined}
         required
-        rows={Math.min(100, Math.max(4, typedQuery.split("\n").length))}
+        minRows={Math.min(100, Math.max(2, typedQuery.split("\n").length))}
         size="md"
         ref={textareaRef}
         value={typedQuery}
