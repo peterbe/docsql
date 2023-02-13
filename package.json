@@ -35,7 +35,7 @@
     "cli-progress": "3.11.2",
     "commander": "10.0.0",
     "dotenv": "16.0.3",
-    "fdir": "5.3.0",
+    "fdir": "6.0.1",
     "gray-matter": "4.0.3",
     "open-editor": "4.0.0",
     "polka": "0.5.2",
