@@ -39,7 +39,7 @@
     "gray-matter": "4.0.3",
     "open-editor": "4.0.0",
     "polka": "0.5.2",
-    "sirv": "2.0.2"
+    "sirv": "2.0.3"
   },
   "devDependencies": {
     "@mantine/core": "6.0.9",
