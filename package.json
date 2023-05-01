@@ -29,17 +29,17 @@
     "/builtin-plugins"
   ],
   "dependencies": {
-    "@emotion/react": "11.10.6",
+    "@emotion/react": "11.10.8",
     "@emotion/server": "11.10.0",
-    "@tabler/icons-react": "2.13.1",
+    "@tabler/icons-react": "2.17.0",
     "cli-progress": "3.12.0",
-    "commander": "10.0.0",
+    "commander": "10.0.1",
     "dotenv": "16.0.3",
     "fdir": "6.0.1",
     "gray-matter": "4.0.3",
     "open-editor": "4.0.0",
     "polka": "0.5.2",
-    "sirv": "2.0.2"
+    "sirv": "2.0.3"
   },
   "devDependencies": {
     "@mantine/core": "6.0.9",
