@@ -1,6 +1,6 @@
 {
   "name": "docsql",
-  "version": "0.11.7",
+  "version": "0.11.8",
   "homepage": "https://github.com/peterbe/docsql",
   "license": "MIT",
   "scripts": {
