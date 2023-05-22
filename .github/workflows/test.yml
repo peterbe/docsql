@@ -49,9 +49,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Export
-        run: npm run export
-
       - name: Start server
         env:
           # It's usually the default for `serve` but good to be explicit

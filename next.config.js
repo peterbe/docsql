@@ -9,6 +9,7 @@ if (process.env.GH_PAGES_PREFIX) {
 }
 
 const nextConfig = {
+  output: "export",
   reactStrictMode: true,
 
   trailingSlash,
