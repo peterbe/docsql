@@ -12,14 +12,12 @@
     "lint": "next lint && npm run prettier-check",
     "prettier-check": "prettier -c \"**/*.{ts,tsx,js,mjs,scss,yml,yaml}\"",
     "prettier-writer": "prettier -w \"**/*.{ts,tsx,js,mjs,scss,yml,yaml}\"",
-    "export": "next export",
-    "build:export": "npm run build && npm run export",
     "run": "node cli/index.mjs",
-    "build:export:run": "npm run build:export && npm run run",
+    "build:run": "npm run build && npm run run",
     "test": "echo 'Tested in Actions'",
     "prepare": "husky install",
     "tsc": "tsc --noEmit",
-    "release": "npm run build:export && np"
+    "release": "npm run build && np"
   },
   "bin": "cli/index.mjs",
   "files": [

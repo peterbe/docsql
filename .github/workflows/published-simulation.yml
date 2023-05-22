@@ -32,9 +32,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Export
-        run: npm run export
-
       - name: Package
         run: npm pack
 
