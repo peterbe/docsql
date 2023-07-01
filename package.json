@@ -27,7 +27,7 @@
     "/builtin-plugins"
   ],
   "dependencies": {
-    "@emotion/react": "11.11.0",
+    "@emotion/react": "11.11.1",
     "@emotion/server": "11.11.0",
     "@tabler/icons-react": "2.20.0",
     "cli-progress": "3.12.0",
