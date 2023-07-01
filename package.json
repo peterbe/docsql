@@ -57,7 +57,7 @@
     "react-dom": "18.2.0",
     "react-refractor": "2.1.7",
     "swr": "2.1.5",
-    "typescript": "5.0.4"
+    "typescript": "5.1.6"
   },
   "repository": {
     "type": "git",
