@@ -52,7 +52,7 @@
     "husky": "8.0.3",
     "next": "13.4.4",
     "np": "8.0.2",
-    "prettier": "2.8.8",
+    "prettier": "3.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-refractor": "2.1.7",

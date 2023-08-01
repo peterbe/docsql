@@ -16,7 +16,7 @@ type BadRequestError = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<OpenFile | BadRequestError>
+  res: NextApiResponse<OpenFile | BadRequestError>,
 ) {
   const filePath = Array.isArray(req.query.filePath)
     ? req.query.filePath[0]

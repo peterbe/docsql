@@ -52,7 +52,7 @@ async function main(opts, sources) {
   if (!sources.length) {
     if (!process.env.CONTENT_SOURCES) {
       throw new Error(
-        "If you don't pass at least one directory, a value must be set in environment variable 'CONTENT_SOURCES'"
+        "If you don't pass at least one directory, a value must be set in environment variable 'CONTENT_SOURCES'",
       );
     }
     sources = process.env.CONTENT_SOURCES.split(",")
@@ -117,7 +117,7 @@ async function main(opts, sources) {
           "Analyzing \u001b[90m{bar}\u001b[0m {percentage}% | {value}/{total}",
         barCompleteChar: "\u2588",
         barIncompleteChar: "\u2591",
-      }
+      },
     );
     progressBar.start(files.length, 0);
     const docs = await analyzeFiles(source, files, plugins, hashCurry, (i) => {

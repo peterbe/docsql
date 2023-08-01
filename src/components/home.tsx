@@ -28,7 +28,7 @@ export const Home: NextPage = () => {
     },
     {
       revalidateOnFocus: process.env.NODE_ENV === "development",
-    }
+    },
   );
 
   return (

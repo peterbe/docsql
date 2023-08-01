@@ -6,7 +6,7 @@ export const CONTENT_SOURCES = _source
 
 if (CONTENT_SOURCES.length === 0) {
   throw new Error(
-    "Configuration error. You have to specify a $CONTENT_SOURCES environment variable."
+    "Configuration error. You have to specify a $CONTENT_SOURCES environment variable.",
   );
 }
 

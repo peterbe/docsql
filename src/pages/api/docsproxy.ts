@@ -9,7 +9,7 @@ type CustomError = { error: string };
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<PagesAndMeta | CustomError>
+  res: NextApiResponse<PagesAndMeta | CustomError>,
 ) {
   class ErrorCodeError extends Error {
     code: string = "";
@@ -18,7 +18,7 @@ export default async function handler(
   const filePath = path.resolve("./out/docs.json");
   try {
     const everything: PagesAndMeta = JSON.parse(
-      fs.readFileSync(filePath, "utf-8")
+      fs.readFileSync(filePath, "utf-8"),
     );
     res.status(200).json(everything);
   } catch (error) {
