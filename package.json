@@ -59,6 +59,9 @@
     "swr": "2.2.0",
     "typescript": "5.1.6"
   },
+  "engines": {
+    "node": "^16 || ^18 || ^19 || ^20"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/peterbe/docsql.git"
