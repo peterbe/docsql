@@ -53,7 +53,7 @@ export function ShowFoundRecords({ records }: { records: Records }) {
     {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
-    }
+    },
   );
 
   // console.log({ openFileResult, openFileError });

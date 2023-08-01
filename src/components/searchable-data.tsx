@@ -74,7 +74,7 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
       try {
         const ast = alasql.parse(query);
         const pretty = fixDoubleAliases(
-          ast.toString().replace("FROM $0 AS default", "FROM ?")
+          ast.toString().replace("FROM $0 AS default", "FROM ?"),
         );
         if (pretty !== query) {
           setPossiblePrettySQL(pretty);
@@ -113,7 +113,7 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
       process.env.NODE_ENV === "development" ? sessionStorage : localStorage;
     try {
       let previous = JSON.parse(
-        storage.getItem("saved_queries") || "[]"
+        storage.getItem("saved_queries") || "[]",
       ) as SavedQuery[];
       if (!Array.isArray(previous)) {
         previous = [];
@@ -147,9 +147,9 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
         "saved_queries",
         JSON.stringify(
           savedQueries.sort(
-            (a, b) => Number(Boolean(b.star)) - Number(Boolean(a.star))
-          )
-        )
+            (a, b) => Number(Boolean(b.star)) - Number(Boolean(a.star)),
+          ),
+        ),
       );
     } catch (err) {
       if (process.env.NODE_ENV === "development") {
@@ -238,7 +238,7 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
             setSavedQueries((prevState) =>
               prevState.filter((entry) => {
                 return !includeStarred && entry.star;
-              })
+              }),
             );
           }}
         />
