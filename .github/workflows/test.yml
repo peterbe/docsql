@@ -23,9 +23,9 @@ jobs:
       matrix:
         node:
           - 16
-          - 17
           - 18
           - 19
+          - 20
     steps:
       - name: Check out repo
         uses: actions/checkout@v3
