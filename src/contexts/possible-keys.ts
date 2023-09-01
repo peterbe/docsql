@@ -1,5 +1,3 @@
-import { createContext } from "react";
-
 import type { Page } from "../types";
 
 type ArrayTypes = "array" | "array(numbers)" | "array(strings)";
@@ -53,5 +51,3 @@ export function pagesToPossibleKeys(pages: Page[]) {
   }
   return found;
 }
-
-export const PossibleKeysContext = createContext<PossibleKeys>(new Map());

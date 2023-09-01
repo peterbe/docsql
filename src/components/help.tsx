@@ -1,11 +1,8 @@
-import { useContext } from "react";
 import { Anchor, Container, Paper, Table, Title } from "@mantine/core";
 
-import { PossibleKeysContext } from "../contexts/possible-keys";
+import type { PossibleKeys } from "../contexts/possible-keys";
 
-export function ShowHelp() {
-  const possibleKeys = useContext(PossibleKeysContext);
-
+export function ShowHelp({ possibleKeys }: { possibleKeys: PossibleKeys }) {
   const allKeys: {
     name: string;
     type: string;
@@ -26,7 +23,6 @@ export function ShowHelp() {
               <tr>
                 <th>Name</th>
                 <th>Type</th>
-                {/* <th>Sample value</th> */}
               </tr>
             </thead>
             <tbody>
@@ -36,7 +32,6 @@ export function ShowHelp() {
                     <code>{name}</code>
                   </td>
                   <td>{type}</td>
-                  {/* <td>{type}</td> */}
                 </tr>
               ))}
             </tbody>

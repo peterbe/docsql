@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "analyze": "npm run run -- --analyze-only",
-    "dev": "npm run analyze && next dev",
+    "dev": "npm run analyze && cp out/docs.json public/ && next dev",
     "build": "next build",
     "clear": "rm -rf .next out",
     "start": "next start",
