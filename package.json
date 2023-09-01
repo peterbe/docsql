@@ -17,7 +17,9 @@
     "test": "echo 'Tested in Actions'",
     "prepare": "husky install",
     "tsc": "tsc --noEmit",
-    "release": "npm run build && np"
+    "release": "npm run build && np",
+    "eslint": "eslint '**/*.{js,mjs,ts,tsx}'",
+    "eslint:fix": "npm run eslint -- --fix"
   },
   "bin": "cli/index.mjs",
   "files": [
