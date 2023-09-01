@@ -9,8 +9,7 @@ import { DemoAlert } from "./demo-alert";
 import { ThemeSwitcher } from "./theme-switcher";
 import styles from "../styles/home.module.css";
 
-const API_URL =
-  process.env.NODE_ENV === "development" ? "/api/docsproxy" : "docs.json";
+const API_URL = "docs.json";
 
 export const Home: NextPage = () => {
   const { data, error } = useSWR<PagesAndMeta, Error>(
@@ -27,7 +26,7 @@ export const Home: NextPage = () => {
       throw new Error(message);
     },
     {
-      revalidateOnFocus: process.env.NODE_ENV === "development",
+      revalidateOnFocus: false,
     },
   );
 

@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import alasql from "alasql";
 import { Alert } from "@mantine/core";
@@ -15,10 +15,8 @@ import { ShowFoundRecords } from "./found-records";
 import { AboutMetadata } from "./about-metadata";
 import useRouterReplace from "../hooks/use-router-replace";
 import { CodeInput } from "./code-input";
-import {
-  pagesToPossibleKeys,
-  PossibleKeysContext,
-} from "../contexts/possible-keys";
+import type { PossibleKeys } from "../contexts/possible-keys";
+import { pagesToPossibleKeys } from "../contexts/possible-keys";
 
 function firstString(thing: string[] | string) {
   if (Array.isArray(thing)) return thing[0];
@@ -209,40 +207,39 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
           <code>{queryError.toString()}</code>
         </Alert>
       )}
-      <PossibleKeysContext.Provider value={possibleKeys}>
-        <CodeInputAndToolbar
-          query={query}
-          setQuery={setQuery}
-          prettyQuery={possiblePrettySQL}
-          queryError={queryError}
-          savedQueries={savedQueries}
-          deleteSavedQuery={(query: string) => {
-            setSavedQueries((prevState) => [
-              ...prevState.filter((p) => p.query !== query),
-            ]);
-          }}
-          starQuery={(query: string) => {
-            setSavedQueries((prevState) => [
-              ...prevState.map((p) => {
-                if (p.query === query) {
-                  return Object.assign({}, p, { star: !Boolean(p.star) });
-                } else {
-                  return Object.assign({}, p);
-                }
-              }),
-            ]);
-          }}
-          currentMenu={currentMenu}
-          toggleMenu={toggleMenu}
-          deleteAllSavedQueries={(includeStarred = false) => {
-            setSavedQueries((prevState) =>
-              prevState.filter((entry) => {
-                return !includeStarred && entry.star;
-              }),
-            );
-          }}
-        />
-      </PossibleKeysContext.Provider>
+      <CodeInputAndToolbar
+        query={query}
+        setQuery={setQuery}
+        prettyQuery={possiblePrettySQL}
+        queryError={queryError}
+        savedQueries={savedQueries}
+        deleteSavedQuery={(query: string) => {
+          setSavedQueries((prevState) => [
+            ...prevState.filter((p) => p.query !== query),
+          ]);
+        }}
+        starQuery={(query: string) => {
+          setSavedQueries((prevState) => [
+            ...prevState.map((p) => {
+              if (p.query === query) {
+                return Object.assign({}, p, { star: !Boolean(p.star) });
+              } else {
+                return Object.assign({}, p);
+              }
+            }),
+          ]);
+        }}
+        currentMenu={currentMenu}
+        toggleMenu={toggleMenu}
+        deleteAllSavedQueries={(includeStarred = false) => {
+          setSavedQueries((prevState) =>
+            prevState.filter((entry) => {
+              return !includeStarred && entry.star;
+            }),
+          );
+        }}
+        possibleKeys={possibleKeys}
+      />
       {foundRecords !== null && currentMenu === "" && (
         <ShowFoundRecords records={foundRecords} />
       )}
@@ -262,6 +259,7 @@ function CodeInputAndToolbar({
   currentMenu,
   toggleMenu,
   deleteAllSavedQueries,
+  possibleKeys,
 }: {
   query: string;
   setQuery: (x: string) => void;
@@ -273,6 +271,7 @@ function CodeInputAndToolbar({
   currentMenu: ToolbarMenuOption;
   toggleMenu: (menu: ToolbarMenuOption) => void;
   deleteAllSavedQueries: (includingStarred?: boolean) => void;
+  possibleKeys: PossibleKeys;
 }) {
   const [typedQuery, setTypedQuery] = useState("");
 
@@ -315,6 +314,7 @@ function CodeInputAndToolbar({
         }}
         starQuery={starQuery}
         deleteAllSavedQueries={deleteAllSavedQueries}
+        possibleKeys={possibleKeys}
       />
     </div>
   );
