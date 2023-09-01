@@ -9,15 +9,22 @@ on:
 jobs:
   development:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node:
+          - 18
+          - 20
+
     steps:
       - name: Check out repo
         uses: actions/checkout@v3
 
-      - name: Setup node
+      - name: Setup node ${{ matrix.node }}
         uses: actions/setup-node@v3
         with:
           cache: npm
-          node-version: "20"
+          node-version: ${{ matrix.node }}
 
       - name: Install dependencies
         run: npm ci
