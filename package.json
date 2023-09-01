@@ -9,7 +9,7 @@
     "build": "next build",
     "clear": "rm -rf .next out",
     "start": "next start",
-    "lint": "next lint && npm run prettier-check",
+    "lint": "next lint && npm run prettier-check && npm run eslint",
     "prettier-check": "prettier -c \"**/*.{ts,tsx,js,mjs,scss,yml,yaml}\"",
     "prettier-writer": "prettier -w \"**/*.{ts,tsx,js,mjs,scss,yml,yaml}\"",
     "run": "node cli/index.mjs",
