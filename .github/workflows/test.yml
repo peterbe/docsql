@@ -25,6 +25,7 @@ jobs:
           - 18
           - 19
           - 20
+
     steps:
       - name: Check out repo
         uses: actions/checkout@v3
@@ -64,8 +65,7 @@ jobs:
         run: |
           curl -v --fail http://localhost:3000/
 
-      - name: Debug any server outputs
-        if: failure()
+      - name: Show server outputs
         run: |
           echo "____STDOUT____"
           cat /tmp/stdout.log
