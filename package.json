@@ -46,7 +46,7 @@
     "@mantine/hooks": "6.0.19",
     "@mantine/next": "6.0.21",
     "@types/node": "20.5.9",
-    "@types/react": "18.2.21",
+    "@types/react": "18.2.23",
     "@types/refractor": "3.0.2",
     "alasql": "4.1.5",
     "eslint": "8.48.0",
