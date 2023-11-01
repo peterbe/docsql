@@ -19,22 +19,22 @@ export function ShowHelp({ possibleKeys }: { possibleKeys: PossibleKeys }) {
         <Paper p="md" shadow="sm" withBorder>
           <Title order={4}>Possible keys</Title>
           <Table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-              </tr>
-            </thead>
-            <tbody>
+            <Table.Thead>
+              <Table.Tr>
+                <Table.Th>Name</Table.Th>
+                <Table.Th>Type</Table.Th>
+              </Table.Tr>
+            </Table.Thead>
+            <Table.Tbody>
               {allKeys.map(({ name, type }) => (
-                <tr key={name}>
-                  <td>
+                <Table.Tr key={name}>
+                  <Table.Td>
                     <code>{name}</code>
-                  </td>
-                  <td>{type}</td>
-                </tr>
+                  </Table.Td>
+                  <Table.Td>{type}</Table.Td>
+                </Table.Tr>
               ))}
-            </tbody>
+            </Table.Tbody>
           </Table>
         </Paper>
       </Container>

@@ -53,7 +53,7 @@ export function ShowFoundRecords({ records }: { records: Records }) {
     {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
-    },
+    }
   );
 
   // console.log({ openFileResult, openFileError });
@@ -94,29 +94,29 @@ export function ShowFoundRecords({ records }: { records: Records }) {
           : null}
       </p>
       <Table className={styles.found_records}>
-        <thead>
-          <tr>
+        <Table.Thead>
+          <Table.Tr>
             <th>&nbsp;</th>
             {keys.map((key) => {
               return <th key={key}>{key}</th>;
             })}
-          </tr>
-        </thead>
-        <tbody>
+          </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody>
           {records.slice(0, MAX_ROWS).map((record, i) => {
             return (
-              <tr
+              <Table.Tr
                 key={`${keyTemplate}${i}`}
                 id={`l${i + 1}`}
                 className={styles.row}
               >
-                <td className={styles.row_number}>
+                <Table.Td className={styles.row_number}>
                   <Anchor href={`#l${i + 1}`}>{i + 1}</Anchor>
-                </td>
+                </Table.Td>
                 {keys.map((key) => {
                   const value = record[key];
                   return (
-                    <td key={key}>
+                    <Table.Td key={key}>
                       <ShowValue
                         key_={key}
                         value={value}
@@ -125,13 +125,13 @@ export function ShowFoundRecords({ records }: { records: Records }) {
                           setOpening(value);
                         }}
                       />
-                    </td>
+                    </Table.Td>
                   );
                 })}
-              </tr>
+              </Table.Tr>
             );
           })}
-        </tbody>
+        </Table.Tbody>
       </Table>
       {records.length > 0 && <DownloadFoundRecords records={records} />}
 
