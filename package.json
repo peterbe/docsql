@@ -47,7 +47,7 @@
     "@mantine/next": "6.0.21",
     "@types/node": "20.7.0",
     "@types/react": "18.2.23",
-    "@types/refractor": "3.0.2",
+    "@types/refractor": "3.0.5",
     "alasql": "4.1.10",
     "eslint": "8.50.0",
     "eslint-config-next": "13.5.3",
