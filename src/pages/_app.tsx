@@ -1,28 +1,10 @@
 import Head from "next/head";
-import {
-  MantineProvider,
-  ColorSchemeProvider,
-  ColorScheme,
-} from "@mantine/core";
-import { useColorScheme, useLocalStorage } from "@mantine/hooks";
-
+import { MantineProvider } from "@mantine/core";
+import "@mantine/core/styles.css";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  // hook will return either 'dark' or 'light' on client
-  // and always 'light' during ssr as window.matchMedia is not available
-  const preferredColorScheme = useColorScheme();
-
-  const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
-    key: "mantine-color-scheme",
-    defaultValue: "light",
-    getInitialValueInEffect: true,
-  });
-
-  const toggleColorScheme = (value?: ColorScheme) =>
-    setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
-
   return (
     <>
       <Head>
@@ -34,24 +16,14 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon-32x32.png" />
       </Head>
 
-      <ColorSchemeProvider
-        colorScheme={colorScheme}
-        toggleColorScheme={toggleColorScheme}
+      <MantineProvider
+        theme={{
+          fontFamilyMonospace:
+            "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
+        }}
       >
-        <MantineProvider
-          theme={{
-            colorScheme,
-
-            // fontFamilyMonospace: "Monaco, Courier, monospace",
-            fontFamilyMonospace:
-              "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
-          }}
-          withGlobalStyles
-          withNormalizeCSS
-        >
-          <Component {...pageProps} />
-        </MantineProvider>
-      </ColorSchemeProvider>
+        <Component {...pageProps} />
+      </MantineProvider>
     </>
   );
 }

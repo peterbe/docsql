@@ -89,7 +89,7 @@ export function ExampleQueries({
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           placeholder="Search filter..."
-          icon={<IconSearch size={14} />}
+          leftSection={<IconSearch size={14} />}
         />
       </form>
 
