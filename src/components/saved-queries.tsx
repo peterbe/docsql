@@ -40,7 +40,7 @@ export function ShowSavedQueries({
             placeholder="Search filter..."
             value={searchFilter}
             onChange={(e) => setSearchFilter(e.target.value)}
-            icon={<IconSearch size={14} />}
+            leftSection={<IconSearch size={14} />}
           />
           {searchFilter.trim() && (
             <div>

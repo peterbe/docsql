@@ -48,7 +48,10 @@ export const Home: NextPage = () => {
               </div>
             </Alert>
           )}
-          <LoadingOverlay visible={!error && !data} transitionDuration={500} />
+          <LoadingOverlay
+            visible={!error && !data}
+            transitionProps={{ duration: 500 }}
+          />
           {data && <SearchableData data={data} />}
         </main>
 
