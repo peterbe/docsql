@@ -7,7 +7,7 @@ export function ThemeSwitcher() {
   return (
     <Button
       variant="subtle"
-      leftIcon={dark ? <IconSun /> : <IconMoonStars />}
+      leftSection={dark ? <IconSun /> : <IconMoonStars />}
       onClick={() => toggleColorScheme()}
       style={{
         position: "absolute",
