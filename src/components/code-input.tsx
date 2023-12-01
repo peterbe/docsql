@@ -85,8 +85,8 @@ export function CodeInput({
               typedQuery.trim() !== query
                 ? "green"
                 : hasError
-                ? "red"
-                : undefined
+                  ? "red"
+                  : undefined
             }
           >
             Run
