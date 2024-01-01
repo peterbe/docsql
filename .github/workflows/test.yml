@@ -23,7 +23,6 @@ jobs:
       matrix:
         node:
           - 18
-          - 19
           - 20
 
     steps:
