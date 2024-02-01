@@ -97,10 +97,9 @@ export function ExampleQueries({
         return (
           <div key={i} className={styles.example}>
             <Highlight highlight={search.split(/\s+/)}>{description}</Highlight>
-            <SQL code={sql} />{" "}
+            <SQL code={sql} />
             <Button
               size="xs"
-              color="success"
               type="button"
               onClick={() => {
                 loadQuery(sql);
