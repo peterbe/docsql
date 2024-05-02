@@ -141,14 +141,7 @@ export function SearchableData({ data }: { data: PagesAndMeta }) {
     const storage =
       process.env.NODE_ENV === "development" ? sessionStorage : localStorage;
     try {
-      storage.setItem(
-        "saved_queries",
-        JSON.stringify(
-          savedQueries.sort(
-            (a, b) => Number(Boolean(b.star)) - Number(Boolean(a.star)),
-          ),
-        ),
-      );
+      storage.setItem("saved_queries", JSON.stringify(savedQueries));
     } catch (err) {
       if (process.env.NODE_ENV === "development") {
         throw err;
