@@ -48,7 +48,7 @@
     "@types/refractor": "3.4.1",
     "alasql": "4.4.0",
     "eslint": "8.57.0",
-    "eslint-config-next": "14.2.3",
+    "eslint-config-next": "14.2.4",
     "husky": "9.0.11",
     "next": "14.2.4",
     "np": "10.0.6",
