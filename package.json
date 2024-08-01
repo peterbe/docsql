@@ -35,7 +35,7 @@
     "dotenv": "16.4.5",
     "fdir": "6.1.1",
     "gray-matter": "4.0.3",
-    "open-editor": "4.1.1",
+    "open-editor": "5.0.0",
     "polka": "0.5.2",
     "sirv": "2.0.4"
   },
