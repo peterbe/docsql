@@ -50,7 +50,7 @@
     "eslint": "8.57.0",
     "eslint-config-next": "14.2.3",
     "husky": "9.0.11",
-    "next": "14.2.4",
+    "next": "14.2.5",
     "np": "10.0.6",
     "prettier": "3.3.2",
     "react": "18.3.1",
