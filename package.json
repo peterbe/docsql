@@ -46,7 +46,7 @@
     "@types/node": "22.5.5",
     "@types/react": "18.3.7",
     "@types/refractor": "3.4.1",
-    "alasql": "4.5.1",
+    "alasql": "4.5.2",
     "eslint": "8.57.0",
     "eslint-config-next": "14.2.12",
     "husky": "9.1.6",
