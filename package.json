@@ -60,7 +60,7 @@
     "typescript": "5.5.4"
   },
   "engines": {
-    "node": "^16 || ^18 || ^19 || ^20"
+    "node": "^16 || ^18 || ^19 || ^20 || ^22"
   },
   "repository": {
     "type": "git",
