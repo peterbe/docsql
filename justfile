@@ -18,3 +18,6 @@ install:
 
 lint:
     npm run lint
+
+release:
+    npm run release
