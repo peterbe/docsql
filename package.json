@@ -29,22 +29,22 @@
     "/builtin-plugins"
   ],
   "dependencies": {
-    "@tabler/icons-react": "3.19.0",
+    "@tabler/icons-react": "3.21.0",
     "cli-progress": "3.12.0",
     "commander": "12.1.0",
     "dotenv": "16.4.5",
-    "fdir": "6.4.0",
+    "fdir": "6.4.2",
     "gray-matter": "4.0.3",
     "open-editor": "5.0.0",
     "polka": "0.5.2",
     "sirv": "2.0.4"
   },
   "devDependencies": {
-    "@mantine/core": "7.13.1",
-    "@mantine/hooks": "7.13.1",
+    "@mantine/core": "7.13.4",
+    "@mantine/hooks": "7.13.4",
     "@mantine/next": "6.0.22",
-    "@types/node": "22.7.4",
-    "@types/react": "18.3.10",
+    "@types/node": "22.8.6",
+    "@types/react": "18.3.12",
     "@types/refractor": "3.4.1",
     "alasql": "4.5.2",
     "eslint": "8.57.0",
