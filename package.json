@@ -43,7 +43,7 @@
     "@mantine/core": "7.14.3",
     "@mantine/hooks": "7.14.3",
     "@mantine/next": "6.0.22",
-    "@types/node": "22.10.1",
+    "@types/node": "22.10.5",
     "@types/react": "18.3.12",
     "@types/refractor": "3.4.1",
     "alasql": "4.5.2",
