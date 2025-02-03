@@ -51,7 +51,7 @@
     "eslint-config-next": "15.1.4",
     "husky": "9.1.7",
     "next": "15.1.6",
-    "np": "10.1.0",
+    "np": "10.2.0",
     "prettier": "3.4.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
