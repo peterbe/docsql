@@ -40,7 +40,7 @@
     "sirv": "3.0.0"
   },
   "devDependencies": {
-    "@mantine/core": "7.14.3",
+    "@mantine/core": "7.16.2",
     "@mantine/hooks": "7.14.3",
     "@mantine/next": "6.0.22",
     "@types/node": "22.13.0",
