@@ -46,9 +46,9 @@
     "@types/node": "22.13.8",
     "@types/react": "18.3.12",
     "@types/refractor": "3.4.1",
-    "alasql": "4.5.2",
+    "alasql": "4.6.4",
     "eslint": "8.57.0",
-    "eslint-config-next": "15.1.6",
+    "eslint-config-next": "15.2.0",
     "husky": "9.1.7",
     "next": "15.2.0",
     "np": "10.2.0",
@@ -57,7 +57,7 @@
     "react-dom": "18.3.1",
     "react-refractor": "2.1.7",
     "swr": "2.3.2",
-    "typescript": "5.7.3"
+    "typescript": "5.8.2"
   },
   "engines": {
     "node": "^16 || ^18 || ^19 || ^20 || ^22"
