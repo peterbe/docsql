@@ -29,7 +29,7 @@
     "/builtin-plugins"
   ],
   "dependencies": {
-    "@tabler/icons-react": "3.29.0",
+    "@tabler/icons-react": "3.30.0",
     "cli-progress": "3.12.0",
     "commander": "13.1.0",
     "dotenv": "16.4.7",
@@ -37,22 +37,22 @@
     "gray-matter": "4.0.3",
     "open-editor": "5.1.0",
     "polka": "0.5.2",
-    "sirv": "3.0.0"
+    "sirv": "3.0.1"
   },
   "devDependencies": {
-    "@mantine/core": "7.14.3",
-    "@mantine/hooks": "7.14.3",
+    "@mantine/core": "7.17.1",
+    "@mantine/hooks": "7.17.1",
     "@mantine/next": "6.0.22",
-    "@types/node": "22.13.0",
+    "@types/node": "22.13.8",
     "@types/react": "18.3.12",
     "@types/refractor": "3.4.1",
     "alasql": "4.5.2",
     "eslint": "8.57.0",
     "eslint-config-next": "15.1.6",
     "husky": "9.1.7",
-    "next": "15.1.6",
+    "next": "15.2.0",
     "np": "10.2.0",
-    "prettier": "3.4.2",
+    "prettier": "3.5.3",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-refractor": "2.1.7",

@@ -21,3 +21,6 @@ lint:
 
 release:
     npm run release
+
+upgrade:
+     npx npm-check-updates --interactive
