@@ -29,7 +29,7 @@
     "/builtin-plugins"
   ],
   "dependencies": {
-    "@tabler/icons-react": "3.29.0",
+    "@tabler/icons-react": "3.30.0",
     "cli-progress": "3.12.0",
     "commander": "13.1.0",
     "dotenv": "16.4.7",
