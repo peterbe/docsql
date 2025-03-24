@@ -48,15 +48,15 @@
     "@types/refractor": "3.4.1",
     "alasql": "4.6.4",
     "eslint": "8.57.0",
-    "eslint-config-next": "15.2.0",
+    "eslint-config-next": "15.2.3",
     "husky": "9.1.7",
-    "next": "15.2.0",
+    "next": "15.2.3",
     "np": "10.2.0",
     "prettier": "3.5.3",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-refractor": "2.1.7",
-    "swr": "2.3.2",
+    "swr": "2.3.3",
     "typescript": "5.8.2"
   },
   "engines": {
