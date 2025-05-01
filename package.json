@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@mantine/core": "7.17.1",
-    "@mantine/hooks": "7.17.1",
+    "@mantine/hooks": "7.17.5",
     "@mantine/next": "6.0.22",
     "@types/node": "22.13.8",
     "@types/react": "18.3.12",
